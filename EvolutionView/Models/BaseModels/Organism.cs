@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EvolutionView.Models
+namespace EvolutionView.Models.BaseModels
 {
-    class Human
+    abstract class Organism
     {
     }
 }

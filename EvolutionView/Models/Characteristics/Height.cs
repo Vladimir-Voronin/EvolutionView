@@ -12,7 +12,7 @@ namespace EvolutionView.Models.Characteristics
 
         public override GeneSeries GenesObject { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public Height(int min = 156, int max = 210)
+        public Height(int min, int max)
         {
             min_height = min;
             max_height = max;
