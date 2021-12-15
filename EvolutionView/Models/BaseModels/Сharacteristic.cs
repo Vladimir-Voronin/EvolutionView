@@ -4,8 +4,8 @@ using System.Text;
 
 namespace EvolutionView.Models.BaseModels
 {
-    abstract class Сharacteristic
+    class Сharacteristic
     {
-        abstract public GeneSeries GenesObject { get; set; }
+        public GeneSeries GenesObject { get; set; }
     }
 }

@@ -10,12 +10,11 @@ namespace EvolutionView.Models.Characteristics
         public readonly int min_height;
         public readonly int max_height;
 
-        public override GeneSeries GenesObject { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public Height(int min, int max)
+        public Height(GeneSeries genes, int min, int max)
         {
             min_height = min;
             max_height = max;
+            GenesObject = genes;
         }
 
         public void SetValue()

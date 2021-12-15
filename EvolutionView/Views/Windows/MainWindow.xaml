@@ -4,12 +4,142 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EvolutionView"
+        xmlns:vm="clr-namespace:EvolutionView.ViewModels"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
         mc:Ignorable="d"
-        Title="MainWindow" 
-        Height="1080" 
+        Title="MainWindow"
+        Height="1080"
         Width="1920"
         WindowState="Maximized">
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Menu Height="25">
+            <MenuItem Header="File"
+                      Height="25"></MenuItem>
+            <MenuItem Header="About"
+                      Height="25"></MenuItem>
+        </Menu>
+
+        <Grid Grid.Column="0"
+              Grid.Row="1"
+              Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Slider Grid.Row="0"
+                    Name="AmountOfHumanSlider"
+                    Width="800"
+                    Height="25"
+                    Margin="0,0,0,0"
+                    Minimum="{Binding MinHumans}"
+                    Maximum="{Binding MaxHumans}"
+                    Value="{Binding NumberOfPeople}"
+                    IsSnapToTickEnabled="True"
+                    TickFrequency="1">
+            </Slider>
+
+            <TextBlock Margin="0,0,10,0"
+                       Text="{Binding ElementName=AmountOfHumanSlider, Path=Value}"
+                       Width="40"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Right"
+                       TextAlignment="Center"
+                       FontSize="20"></TextBlock>
+
+
+            <TextBlock HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Margin="20,36,0,0"
+                       Text="Choose the world"
+                       FontSize="16" />
+
+            <ComboBox Height="18"
+                      Width="102"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Margin="162,39,0,0"></ComboBox>
+
+            <GroupBox Grid.Row="1">
+                <DockPanel Height="25"
+                           VerticalAlignment="Top">
+                    <CheckBox Content="Name Of the characteristic"></CheckBox>
+                    <Slider Grid.Row="1"
+                            Name="Slider1"
+                            Width="500"
+                            Height="25"
+                            Margin="20,0,0,0"
+                            IsSnapToTickEnabled="True"
+                            TickFrequency="1">
+                    </Slider>
+                    <TextBlock Margin="20,0,0,0"
+                               Text="{Binding ElementName=Slider1, Path=Value}"
+                               Width="30"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Left"
+                               TextAlignment="Center"
+                               FontSize="20"></TextBlock>
+                </DockPanel>
+            </GroupBox>
+        </Grid>
+
+        <Grid Grid.Column="1"
+              Grid.Row="1"
+              Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="200" />
+            </Grid.RowDefinitions>
+
+            <DataGrid Grid.Row="0">
+
+            </DataGrid>
+
+            <Button Grid.Row="1"
+                    Width="100"
+                    Height="60">
+                <fa:ImageAwesome Icon="Solid_Play"
+                                 Margin="10"
+                                 Foreground="Black" />
+            </Button>
+
+            <Button Grid.Row="1"
+                    Width="100"
+                    Height="60"
+                    Margin="230,0,0,0">
+                <fa:ImageAwesome Icon="Solid_Stop"
+                                 Margin="10"
+                                 Foreground="Black" />
+            </Button>
+
+            <Button Grid.Row="1"
+                    Width="100"
+                    Height="60"
+                    Margin="0,0,230,0">
+                <fa:ImageAwesome Icon="Solid_Pause"
+                                 Margin="10"
+                                 Foreground="Black" />
+            </Button>
+            <Button Grid.Row="1"
+                    Width="100"
+                    Height="60"
+                    Margin="0,0,460,0" Content="Start"
+                    FontSize="24"
+                    Foreground="Black">
+            </Button>
+        </Grid>
+
     </Grid>
 </Window>
