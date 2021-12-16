@@ -34,8 +34,11 @@ namespace EvolutionView.Models.Organisms
 
         public void CalculateHeight()
         {
-            Height height = (Height)SettingsDict["Height"];
-            //genes_list.AddRange(height.GenesObject.Serie);
+            if (SettingsDict.ContainsKey("Height"))
+            {
+                Height height = (Height)SettingsDict["Height"];
+                //genes_list.AddRange(height.GenesObject.Serie);
+            }
 
         }
     }

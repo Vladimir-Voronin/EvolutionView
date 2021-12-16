@@ -75,14 +75,20 @@
             <GroupBox Grid.Row="1">
                 <DockPanel Height="25"
                            VerticalAlignment="Top">
-                    <CheckBox Content="Name Of the characteristic"></CheckBox>
+                    <CheckBox Content="Name Of the characteristic"
+                              IsChecked="{Binding IsActiveHeightCharacteristic}">
+                        
+                    </CheckBox>
                     <Slider Grid.Row="1"
                             Name="Slider1"
                             Width="500"
                             Height="25"
                             Margin="20,0,0,0"
                             IsSnapToTickEnabled="True"
-                            TickFrequency="1">
+                            TickFrequency="1"
+                            Minimum="{Binding MinGenesHeight}"
+                            Maximum="{Binding MaxGenesHeight}"
+                            Value="{Binding GenesValueHeight}">
                     </Slider>
                     <TextBlock Margin="20,0,0,0"
                                Text="{Binding ElementName=Slider1, Path=Value}"
@@ -109,7 +115,8 @@
                     <DataGridTextColumn Header="LALA"
                                         Binding="{Binding genes_list[0].Value}"/>
                     <DataGridTextColumn Header="DADA"/>
-                    <DataGridTextColumn Header="Genes"/>
+                    <DataGridTextColumn Header="Genes"
+                                        Binding="{Binding genes_list.Count}"/>
                 </DataGrid.Columns>
 
             </DataGrid>
