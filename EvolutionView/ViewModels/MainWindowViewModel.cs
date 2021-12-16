@@ -17,15 +17,24 @@ namespace EvolutionView.ViewModels
     {
         #region Properties
 
-        private ObservableCollection<Human> list_of_humans = Evolution.HumanList;
+        private ObservableCollection<Human> list_of_humans;
 
         public ObservableCollection<Human> ListOfHumans
         {
             get { return list_of_humans; }
             set { list_of_humans = value; }
         }
-        #region GenesSettings
 
+        private int current_year;
+
+        public int CurrentYear
+        {
+            get { return current_year; }
+            set { current_year = value; }
+        }
+
+
+        #region GenesSettings
 
         // CheckBoxes
         #region IsActiveSetting
@@ -119,10 +128,46 @@ namespace EvolutionView.ViewModels
             // Set Current Genes
             HeightParametrsDefault.CurrentGenes = GenesValueHeight;
 
-            Evolution evolution = new Evolution(new BasketballPlayersWorld(), NumberOfPeople);
+            ListOfHumans.Clear();
+            HumanFactory factory = new HumanFactory();
+            factory.SetSettings(new BasketballPlayersWorld());
+
+            for (int i = 0; i < NumberOfPeople; i++)
+            {
+                ListOfHumans.Add(factory.ReturnNewHuman());
+            }
+
+            StartEvolution();
         }
 
         #endregion
+
+        private void StartEvolution()
+        {
+            //while(!StopTheGame)
+            //{
+            //    Year += 1;
+            //}
+            for (int i = 0; i < 20; i++)
+            {
+                CurrentYear += 1;
+            }
+        }
+
+        public void PauseEvolution()
+        {
+
+        }
+
+        public void ContinueEvolution()
+        {
+
+        }
+
+        public void StopEvolution()
+        {
+
+        }
 
         public MainWindowViewModel()
         {
@@ -131,6 +176,8 @@ namespace EvolutionView.ViewModels
             StartEvolutionCommand = new ActionCommand(OnStartEvolutionCommandExecuted, CanStartEvolutionCommandExecute);
 
             #endregion
+
+            ListOfHumans = new ObservableCollection<Human>();
         }
     }
 }
