@@ -6,6 +6,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using EvolutionView.Models.BaseModels;
 using EvolutionView.Models.Characteristics;
+using EvolutionView.Models.Organisms;
+using EvolutionView.Infrastructure.Commands;
 
 namespace EvolutionView.ViewModels
 {
@@ -13,12 +15,12 @@ namespace EvolutionView.ViewModels
     {
         #region Properties
 
-        private ObservableCollection<Сharacteristic> list_of_characteristic;
+        private ObservableCollection<Human> list_of_humans;
 
-        public ObservableCollection<Сharacteristic> ListOfCharacteristic
+        public ObservableCollection<Human> ListOfHumans
         {
-            get { return list_of_characteristic; }
-            set { list_of_characteristic = value; }
+            get { return list_of_humans; }
+            set { list_of_humans = value; }
         }
 
         // set boundaries for the number of people
@@ -44,16 +46,42 @@ namespace EvolutionView.ViewModels
             set { number_of_people = value; }
         }
 
+        private Human test_human;
+
+        public Human TestHuman
+        {
+            get { return test_human; }
+            set { test_human = value; }
+        }
+
 
         #endregion
 
         #region Commands
 
+        public ICommand StartEvolutionCommand { get; }
+
+        private bool CanStartEvolutionCommandExecute(object p) => true;
+
+        private void OnStartEvolutionCommandExecuted(object p)
+        {
+            HeightParametrsDefault.CurrentGenes = 10;
+            HumanFactory factory = new HumanFactory();
+            factory.SetSettings();
+            TestHuman = factory.ReturnNewHuman();
+            ListOfHumans = new ObservableCollection<Human>();
+            ListOfHumans.Add(TestHuman);
+        }
+
         #endregion
 
         public MainWindowViewModel()
         {
+            #region Commands
 
+            StartEvolutionCommand = new ActionCommand(OnStartEvolutionCommandExecuted, CanStartEvolutionCommandExecute);
+
+            #endregion
         }
     }
 }

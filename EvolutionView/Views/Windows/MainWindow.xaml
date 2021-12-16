@@ -103,7 +103,14 @@
                 <RowDefinition Height="200" />
             </Grid.RowDefinitions>
 
-            <DataGrid Grid.Row="0">
+            <DataGrid Grid.Row="0"
+                      ItemsSource="{Binding ListOfHumans}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="LALA"
+                                        Binding="{Binding genes_list[0].Value}"/>
+                    <DataGridTextColumn Header="DADA"/>
+                    <DataGridTextColumn Header="Genes"/>
+                </DataGrid.Columns>
 
             </DataGrid>
 
@@ -137,7 +144,8 @@
                     Height="60"
                     Margin="0,0,460,0" Content="Start"
                     FontSize="24"
-                    Foreground="Black">
+                    Foreground="Black"
+                    Command="{Binding StartEvolutionCommand}">
             </Button>
         </Grid>
 
