@@ -9,6 +9,7 @@ using EvolutionView.Models.Characteristics;
 using EvolutionView.Models.Organisms;
 using EvolutionView.Infrastructure.Commands;
 using EvolutionView.Models.Worlds;
+using EvolutionView.Models;
 
 namespace EvolutionView.ViewModels
 {
@@ -16,7 +17,7 @@ namespace EvolutionView.ViewModels
     {
         #region Properties
 
-        private ObservableCollection<Human> list_of_humans;
+        private ObservableCollection<Human> list_of_humans = Evolution.HumanList;
 
         public ObservableCollection<Human> ListOfHumans
         {
@@ -115,15 +116,10 @@ namespace EvolutionView.ViewModels
 
         private void OnStartEvolutionCommandExecuted(object p)
         {
-            ListOfHumans.Clear();
+            // Set Current Genes
             HeightParametrsDefault.CurrentGenes = GenesValueHeight;
-            HumanFactory factory = new HumanFactory();
-            factory.SetSettings();
 
-            for (int i = 0; i < NumberOfPeople; i++)
-            {
-                ListOfHumans.Add(factory.ReturnNewHuman(new BasketballPlayersWorld()));
-            }
+            Evolution evolution = new Evolution(new BasketballPlayersWorld(), NumberOfPeople);
         }
 
         #endregion
@@ -135,8 +131,6 @@ namespace EvolutionView.ViewModels
             StartEvolutionCommand = new ActionCommand(OnStartEvolutionCommandExecuted, CanStartEvolutionCommandExecute);
 
             #endregion
-
-            ListOfHumans = new ObservableCollection<Human>();
         }
     }
 }

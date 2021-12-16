@@ -13,7 +13,7 @@ namespace EvolutionView.Infrastructure.HelpClasses
             float percent = (float)current_value / max;
 
             if (IsUpper) return percent * max_points;
-            else return (100 - percent) * max_points;
+            else return (1 - percent) * max_points;
         }
     }
 }

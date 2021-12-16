@@ -12,12 +12,16 @@ namespace EvolutionView.Models.Organisms
 
         private int AmountofGenes;
 
+        private HumanWorld TheWorld { get; set; }
+
         public HumanFactory()
         {
         }
 
-        public void SetSettings()
+        public void SetSettings(HumanWorld world)
         {
+            TheWorld = world;
+
             // All characteristics should be in SettingsDict
             int start_index = 0;
             int end_index = 0;
@@ -36,9 +40,9 @@ namespace EvolutionView.Models.Organisms
             AmountofGenes = end_index;
         }
 
-        public Human ReturnNewHuman(HumanWorld world)
+        public Human ReturnNewHuman()
         {
-            return new Human(AmountofGenes, world);
+            return new Human(AmountofGenes, TheWorld);
         }
     }
 }

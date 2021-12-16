@@ -22,7 +22,7 @@ namespace EvolutionView.Models.Worlds
 
         private float EvaluateHeight(Height height)
         {
-            if (height.Value.HasValue)
+            if (height != null && height.Value.HasValue)
             {
                 return EvaluatePro.LinearFunction(HeightParametrsDefault.min_height, HeightParametrsDefault.max_height, 200, height.Value.Value);
             }
