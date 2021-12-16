@@ -8,7 +8,7 @@ namespace EvolutionView.Models.Organisms
 {
     class HumanFactory
     {
-        private Dictionary<string, Сharacteristic> SettingsDict { get; set; }
+        //private Dictionary<string, Сharacteristic> SettingsDict { get; set; }
 
         private int AmountofGenes;
 
@@ -18,7 +18,6 @@ namespace EvolutionView.Models.Organisms
 
         public void SetSettings()
         {
-            SettingsDict = new Dictionary<string, Сharacteristic>();
             // All characteristics should be in SettingsDict
             int start_index = 0;
             int end_index = 0;
@@ -26,17 +25,20 @@ namespace EvolutionView.Models.Organisms
             {
                 end_index += HeightParametrsDefault.CurrentGenes;
                 GeneSeries gen_serias = new GeneSeries(HeightParametrsDefault.CurrentGenes);
-                Height height = new Height(gen_serias, start_index, end_index);
-                SettingsDict.Add(HeightParametrsDefault.Name, height);
+
+                // Set Parametrs Default
+                HeightParametrsDefault.StartIndex = start_index;
+                HeightParametrsDefault.EndIndex = end_index;
+
                 start_index += HeightParametrsDefault.CurrentGenes;
             }
 
             AmountofGenes = end_index;
         }
 
-        public Human ReturnNewHuman()
+        public Human ReturnNewHuman(HumanWorld world)
         {
-            return new Human(SettingsDict, AmountofGenes);
+            return new Human(AmountofGenes, world);
         }
     }
 }

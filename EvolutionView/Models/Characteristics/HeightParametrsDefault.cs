@@ -11,6 +11,9 @@ namespace EvolutionView.Models.Characteristics
         public static readonly int min_genes = 8;
         public static readonly int max_genes = 24;
 
+        public static int StartIndex { get; set; }
+        public static int EndIndex { get; set; }
+
         private static int current_genes;
 
         public static int CurrentGenes
@@ -22,6 +25,12 @@ namespace EvolutionView.Models.Characteristics
                 else if (value > max_genes) current_genes = max_genes;
                 else current_genes = value;
             }
+        }
+
+        public static Height ReturnNewCharacteristic()
+        {
+            GeneSeries g = new GeneSeries(CurrentGenes);
+            return new Height(g);
         }
     }
 }

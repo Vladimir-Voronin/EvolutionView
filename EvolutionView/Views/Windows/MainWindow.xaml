@@ -110,13 +110,15 @@
             </Grid.RowDefinitions>
 
             <DataGrid Grid.Row="0"
-                      ItemsSource="{Binding ListOfHumans}">
+                      ItemsSource="{Binding ListOfHumans}"
+                      AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="LALA"
-                                        Binding="{Binding genes_list[0].Value}"/>
-                    <DataGridTextColumn Header="DADA"/>
+                    <DataGridTextColumn Header="Height"
+                                        Binding="{Binding HeightObject.Value}"/>
                     <DataGridTextColumn Header="Genes"
                                         Binding="{Binding genes_list.Count}"/>
+                    <DataGridTextColumn Header="Genes"
+                                        Binding="{Binding Points}"/>
                 </DataGrid.Columns>
 
             </DataGrid>

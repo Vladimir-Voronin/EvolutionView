@@ -7,13 +7,11 @@ namespace EvolutionView.Models
 {
     class Game
     {
-        public World WorldType { get; set; }
+        public HumanWorld WorldType { get; set; }
 
         public List<Human> HumanList { get; set; }
 
-        public List<float> HumanWeight { get; set; }
-
-        public Game(World world_type, List<ICharacteristicParametrsDefault> parametrs)
+        public Game(HumanWorld world_type, List<ICharacteristicParametrsDefault> parametrs)
         {
             WorldType = world_type;
             HumanFactory factory = new HumanFactory();

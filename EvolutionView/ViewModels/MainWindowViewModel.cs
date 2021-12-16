@@ -8,6 +8,7 @@ using EvolutionView.Models.BaseModels;
 using EvolutionView.Models.Characteristics;
 using EvolutionView.Models.Organisms;
 using EvolutionView.Infrastructure.Commands;
+using EvolutionView.Models.Worlds;
 
 namespace EvolutionView.ViewModels
 {
@@ -43,14 +44,14 @@ namespace EvolutionView.ViewModels
         #region Minimum and Maximum Genes  
 
         // set boundaries for the number of people
-        private int minimum_humans = 10;
+        private readonly int minimum_humans = 10;
 
         public int MinHumans
         {
             get { return minimum_humans; }
         }
 
-        private int maximum_humans = 100;
+        private readonly int maximum_humans = 100;
 
         public int MaxHumans
         {
@@ -121,8 +122,7 @@ namespace EvolutionView.ViewModels
 
             for (int i = 0; i < NumberOfPeople; i++)
             {
-                TestHuman = factory.ReturnNewHuman();
-                ListOfHumans.Add(TestHuman);
+                ListOfHumans.Add(factory.ReturnNewHuman(new BasketballPlayersWorld()));
             }
         }
 
