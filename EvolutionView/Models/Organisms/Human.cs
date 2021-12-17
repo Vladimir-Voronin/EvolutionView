@@ -5,16 +5,28 @@ using System.Linq;
 using System;
 using EvolutionView.Infrastructure.Interfaces;
 using EvolutionView.Infrastructure;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace EvolutionView.Models.Organisms
 {
-    class Human : Organism
+    class Human : Organism, INotifyPropertyChanged
     {
         public static List<ICharacteristicParametrsDefault> HumanCharacteristicList { get; set; } = new List<ICharacteristicParametrsDefault>() { new HeightParametrsDefault() };
 
         public bool IsAlive { get; set; } = true;
 
-        public int Age { get; set; }
+        private int _age;
+
+        public int Age
+        {
+            get { return _age; }
+            set
+            {
+                _age = value;
+                OnPropertyChanged();
+            }
+        }
 
         public Height HeightObject { get; set; }
 
@@ -35,6 +47,18 @@ namespace EvolutionView.Models.Organisms
 
             CalculatePoints(world);
         }
+
+        #region Property changed logic
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string PropertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+        }
+
+        #endregion
 
         public void CalculatePoints(HumanWorld world)
         {

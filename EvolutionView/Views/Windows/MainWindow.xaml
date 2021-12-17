@@ -117,6 +117,8 @@
                                         Binding="{Binding HeightObject.Value}"/>
                     <DataGridTextColumn Header="Genes"
                                         Binding="{Binding genes_list.Count}"/>
+                    <DataGridTextColumn Header="Age"
+                                        Binding="{Binding Age}"/>
                     <DataGridTextColumn Header="Points"
                                         Binding="{Binding Points}"/>
                 </DataGrid.Columns>

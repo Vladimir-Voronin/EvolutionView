@@ -10,6 +10,10 @@ using EvolutionView.Models.Organisms;
 using EvolutionView.Infrastructure.Commands;
 using EvolutionView.Models.Worlds;
 using EvolutionView.Models;
+using System.Windows.Threading;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace EvolutionView.ViewModels
 {
@@ -137,7 +141,7 @@ namespace EvolutionView.ViewModels
                 ListOfHumans.Add(factory.ReturnNewHuman());
             }
 
-            StartEvolution();
+            Task t = Task.Run(StartEvolution);
         }
 
         #endregion
@@ -148,9 +152,13 @@ namespace EvolutionView.ViewModels
             //{
             //    Year += 1;
             //}
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 100; i++)
             {
-                CurrentYear += 1;
+                foreach (var human in ListOfHumans)
+                {
+                    human.Age += 1;
+                }
+                Thread.Sleep(10);
             }
         }
 
