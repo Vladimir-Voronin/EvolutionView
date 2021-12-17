@@ -6,27 +6,31 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
+using EvolutionView.Infrastructure;
 using EvolutionView.Models.Organisms;
 using EvolutionView.Models.BaseModels;
-using EvolutionView.Infrastructure;
 
 namespace EvolutionView.Models
 {
     class Evolution : IDisposable, INotifyPropertyChanged
     {
-        private HumanWorld WorldType { get; set; }
-
         public static ObservableCollection<Human> HumanList { get; set; } = new ObservableCollection<Human>();
 
-        public static bool DeleteDeadHumans {get; set;}
+        public static int PopulationThreshold { get; set; } = 200;
+
+        public static bool DeleteDeadHumans { get; set; } = true;
+
+        public static int DefaultDeathCoefficientPart { get; set; } = 30;
+
+        private int Deathcoefficient { get; set; }
+
+        private HumanWorld WorldType { get; set; }
 
         private List<Human> AliveHumansInThisYear { get; set; }
 
         private bool StopTheEvolution { get; set; }
 
         private HumanFactory Factory { get; set; }
-
-        private static int Deathcoefficient { get; set; } = 30;
 
         private float MaxPointsInThisYear { get; set; } = 0;
 
@@ -61,6 +65,7 @@ namespace EvolutionView.Models
                 HumanList.Add(Factory.ReturnNewHuman());
             }
 
+            Deathcoefficient = DefaultDeathCoefficientPart;
             CurrentYear = 0;
         }
 
@@ -137,7 +142,6 @@ namespace EvolutionView.Models
                 });
             }
                 
-
             IEnumerable<Human> alives = from human in HumanList
                                      where human.IsAlive
                                      select human;
@@ -147,7 +151,11 @@ namespace EvolutionView.Models
             float chance = 0;
             float randomFloat = 0;
             int random_index = -1;
-            if(AliveHumansInThisYear.Count > 1)
+
+            // Change the DeathCoeficient if numbers of alive humans > PopulationThreshold
+            AdjustDeathCoefficient(AliveHumansInThisYear.Count());
+
+            if (AliveHumansInThisYear.Count > 1)
             {
                 for (int i = 0; i < AliveHumansInThisYear.Count(); i++)
                 {
@@ -167,6 +175,19 @@ namespace EvolutionView.Models
                         });
                     }
                 }
+            }
+        }
+
+        private void AdjustDeathCoefficient(int number_of_alive_humans)
+        {
+            if(number_of_alive_humans > PopulationThreshold)
+            {
+                int shift = Convert.ToInt32(PopulationThreshold * 0.1);
+                Deathcoefficient = DefaultDeathCoefficientPart + 1 + (number_of_alive_humans - PopulationThreshold) / shift;
+            }
+            else
+            {
+                Deathcoefficient = DefaultDeathCoefficientPart;
             }
         }
 

@@ -6,12 +6,11 @@ namespace EvolutionViewConsoleTest
     {
         static void Main(string[] args)
         {
-            Random rand = new Random();
-            for (int i = 0; i < 10; i++)
-            {
-                int a = rand.Next(0, 2);
-                Console.WriteLine(a);
-            }
+            int a = 210;
+            int b = 156;
+            int c = a - b;
+            int d = c / 8;
+            Console.WriteLine(d);
         }
     }
 }

@@ -6,8 +6,8 @@ namespace EvolutionView.Models.Characteristics
     {
         public static bool IsActive = true;
         public static string Name = "Height";
-        public static readonly int min_height = 156;
-        public static readonly int max_height = 210;
+        public static readonly int min_value = 156;
+        public static readonly int max_value = 210;
         public static readonly int min_genes = 8;
         public static readonly int max_genes = 24;
 

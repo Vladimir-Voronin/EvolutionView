@@ -42,16 +42,15 @@ namespace EvolutionView.ViewModels
             }
         }
 
-        private bool delete_dead_humans;
+        private bool delete_dead_humans = Evolution.DeleteDeadHumans;
 
-        public bool DeleteDeadHumans
+        public bool DeleteDeadHumans 
         {
             get { return delete_dead_humans; }
             set { delete_dead_humans = value;
                 Evolution.DeleteDeadHumans = value;
             }
         }
-
 
         #region GenesSettings
 
@@ -66,11 +65,9 @@ namespace EvolutionView.ViewModels
             set { is_active_height_characteristic = HeightParametrsDefault.IsActive = value; }
         }
 
-
         #endregion
 
-        // SLIDERS
-        #region Minimum and Maximum Genes  
+        #region Evolution Settings
 
         // set boundaries for the number of people
         private readonly int minimum_humans = 10;
@@ -94,6 +91,35 @@ namespace EvolutionView.ViewModels
             get { return number_of_people; }
             set { number_of_people = value; }
         }
+        
+        private readonly int minimum_population_threshold = 100;
+
+        public int MinimumPopulationthreshold
+        {
+            get { return minimum_population_threshold; }
+        }
+
+        private readonly int maximum_population_threshold = 2000;
+
+        public int MaximumPopulationthreshold
+        {
+            get { return maximum_population_threshold; }
+        }
+
+        private int population_threshold_value = Evolution.PopulationThreshold;
+
+        public int PopulationThresholdValue
+        {
+            get { return population_threshold_value; }
+            set { population_threshold_value = value;
+                Evolution.PopulationThreshold = value;
+            }
+        }
+
+        #endregion
+
+        // SLIDERS
+        #region Minimum and Maximum Genes  
 
         private int min_genes_height = HeightParametrsDefault.min_genes;
 

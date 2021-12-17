@@ -116,6 +116,7 @@ namespace EvolutionView.Models.Organisms
         {
             if (HeightParametrsDefault.IsActive)
             {
+                int shift = (HeightParametrsDefault.max_value - HeightParametrsDefault.min_value) / HeightParametrsDefault.CurrentGenes / 2;
                 // Create new object
                 HeightObject = HeightParametrsDefault.ReturnNewCharacteristic();
                 // From GenesList set Serie to object
@@ -126,8 +127,8 @@ namespace EvolutionView.Models.Organisms
                 float percent_equals_to_1 = GenesList.GetRange(HeightParametrsDefault.StartIndex, HeightParametrsDefault.EndIndex - HeightParametrsDefault.StartIndex).Count((x) => x.Value == 1) /
                     (float)GenesList.GetRange(HeightParametrsDefault.StartIndex, HeightParametrsDefault.EndIndex - HeightParametrsDefault.StartIndex).Count;
 
-                int step = Convert.ToInt32((HeightParametrsDefault.max_height - HeightParametrsDefault.min_height) * percent_equals_to_1);
-                HeightObject.Value = Convert.ToInt32(HeightParametrsDefault.min_height + step);
+                int step = Convert.ToInt32((HeightParametrsDefault.max_value - HeightParametrsDefault.min_value) * percent_equals_to_1);
+                HeightObject.Value = Convert.ToInt32(HeightParametrsDefault.min_value + step) + StaticVariables.Rand.Next(-shift, shift + 1);
             }
         }
 
