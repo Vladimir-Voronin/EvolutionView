@@ -41,9 +41,10 @@
 
             <Slider Grid.Row="0"
                     Name="AmountOfHumanSlider"
-                    Width="800"
+                    HorizontalAlignment="Left"
+                    Width="700"
                     Height="25"
-                    Margin="0,0,0,0"
+                    Margin="60,0,0,0"
                     Minimum="{Binding MinHumans}"
                     Maximum="{Binding MaxHumans}"
                     Value="{Binding NumberOfPeople}"
@@ -51,12 +52,12 @@
                     TickFrequency="1">
             </Slider>
 
-            <TextBlock Margin="0,0,10,0"
+            <TextBlock Margin="0,0,10,10"
                        Text="{Binding ElementName=AmountOfHumanSlider, Path=Value}"
-                       Width="40"
+                       Width="140"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Right"
-                       TextAlignment="Center"
+                       TextAlignment="Left"
                        FontSize="20"></TextBlock>
 
 
@@ -65,6 +66,11 @@
                        Margin="20,36,0,0"
                        Text="Choose the world"
                        FontSize="16" />
+
+            <CheckBox Content="delete dead humans"
+                      VerticalAlignment="Top"
+                      Margin="30,80,0,0"
+                      IsChecked="{Binding DeleteDeadHumans}" />
 
             <ComboBox Height="18"
                       Width="102"

@@ -4,6 +4,6 @@ namespace EvolutionView.Models
 {
     struct Gene
     {
-        public byte Value { get; set; }
+        public int Value { get; set; }
     }
 }

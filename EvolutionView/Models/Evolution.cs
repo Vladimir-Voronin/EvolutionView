@@ -1,21 +1,34 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
+using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 using EvolutionView.Models.Organisms;
 using EvolutionView.Models.BaseModels;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using EvolutionView.Infrastructure;
 
 namespace EvolutionView.Models
 {
     class Evolution : IDisposable, INotifyPropertyChanged
     {
-        public HumanWorld WorldType { get; set; }
+        private HumanWorld WorldType { get; set; }
 
         public static ObservableCollection<Human> HumanList { get; set; } = new ObservableCollection<Human>();
 
-        public bool StopTheGame { get; set; }
+        public static bool DeleteDeadHumans {get; set;}
+
+        private List<Human> AliveHumansInThisYear { get; set; }
+
+        private bool StopTheEvolution { get; set; }
+
+        private HumanFactory Factory { get; set; }
+
+        private static int Deathcoefficient { get; set; } = 30;
+
+        private float MaxPointsInThisYear { get; set; } = 0;
 
         private int current_year;
 
@@ -40,12 +53,12 @@ namespace EvolutionView.Models
             WorldType = world_type;
 
             HumanList.Clear();
-            HumanFactory factory = new HumanFactory();
-            factory.SetSettings(WorldType);
+            Factory = new HumanFactory();
+            Factory.SetSettings(WorldType);
 
             for (int i = 0; i < number_of_people_on_start; i++)
             {
-                HumanList.Add(factory.ReturnNewHuman());
+                HumanList.Add(Factory.ReturnNewHuman());
             }
 
             CurrentYear = 0;
@@ -83,22 +96,83 @@ namespace EvolutionView.Models
                 {
                     return;
                 }
-                if (!StopTheGame)
+                if (!StopTheEvolution)
                 {
-                    CurrentYear += 1;
-                    foreach (var human in HumanList)
+                    OneYearOfEvolution();
+                    Thread.Sleep(300);
+                }
+            }
+        }
+
+        private void OneYearOfEvolution()
+        {
+            MaxPointsInThisYear = 0;
+            CurrentYear += 1;
+            
+            foreach (var human in HumanList)
+                {
+                    if (human.IsAlive)
                     {
-                        if (human.IsAlive) human.Age += 1;
-                        if (human.Age == human.LifeExpectancy) human.IsAlive = false;
+                        human.Age += 1;
+                        MaxPointsInThisYear = human.Points > MaxPointsInThisYear ? human.Points : MaxPointsInThisYear;
                     }
-                    Thread.Sleep(30);
+                    if (human.Age == human.LifeExpectancy)
+                    {
+                        human.IsAlive = false;
+                    }
+                }
+
+            if (DeleteDeadHumans)
+            {
+                App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                {
+                    for (int i = 0; i < HumanList.Count; i++)
+                    {
+                        if (HumanList[i].IsAlive != true)
+                        {
+                            HumanList.RemoveAt(i);
+                            i--;
+                        }
+                    }
+                });
+            }
+                
+
+            IEnumerable<Human> alives = from human in HumanList
+                                     where human.IsAlive
+                                     select human;
+
+            AliveHumansInThisYear = alives.ToList();
+
+            float chance = 0;
+            float randomFloat = 0;
+            int random_index = -1;
+            if(AliveHumansInThisYear.Count > 1)
+            {
+                for (int i = 0; i < AliveHumansInThisYear.Count(); i++)
+                {
+                    chance = AliveHumansInThisYear[i].Points / MaxPointsInThisYear / Deathcoefficient;
+                    randomFloat = (float)StaticVariables.Rand.NextDouble();
+                    if (randomFloat < chance)
+                    {
+                        while(random_index < 0 || random_index == i)
+                        {
+                            random_index = StaticVariables.Rand.Next(0, AliveHumansInThisYear.Count());
+                        }
+
+                        App.Current.Dispatcher.Invoke((Action)delegate // <--- HERE
+                        {
+                            if (random_index >= 0 && random_index != i)
+                                HumanList.Add(Factory.ReturnNewHumanByTwoHumans(AliveHumansInThisYear[i], AliveHumansInThisYear[random_index]));
+                        });
+                    }
                 }
             }
         }
 
         public void PauseEvolution()
         {
-            StopTheGame = true;
+            StopTheEvolution = true;
         }
 
         public void StopEvolution()
@@ -108,7 +182,7 @@ namespace EvolutionView.Models
 
         public void ContinueEvolution()
         {
-            StopTheGame = false;
+            StopTheEvolution = false;
         }
 
         public void Dispose()

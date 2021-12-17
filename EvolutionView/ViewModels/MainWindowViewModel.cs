@@ -42,6 +42,16 @@ namespace EvolutionView.ViewModels
             }
         }
 
+        private bool delete_dead_humans;
+
+        public bool DeleteDeadHumans
+        {
+            get { return delete_dead_humans; }
+            set { delete_dead_humans = value;
+                Evolution.DeleteDeadHumans = value;
+            }
+        }
+
 
         #region GenesSettings
 
@@ -70,7 +80,7 @@ namespace EvolutionView.ViewModels
             get { return minimum_humans; }
         }
 
-        private readonly int maximum_humans = 100;
+        private readonly int maximum_humans = 200;
 
         public int MaxHumans
         {

@@ -44,5 +44,10 @@ namespace EvolutionView.Models.Organisms
         {
             return new Human(AmountofGenes, TheWorld);
         }
+
+        public Human ReturnNewHumanByTwoHumans(Human first_human, Human second_human)
+        {
+            return new Human(first_human, second_human, TheWorld);
+        }
     }
 }

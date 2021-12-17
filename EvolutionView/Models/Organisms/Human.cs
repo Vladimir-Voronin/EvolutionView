@@ -19,6 +19,8 @@ namespace EvolutionView.Models.Organisms
 
         public int LifeExpectancy { get; set; }
 
+        public int NumbersOfChildren { get; set; }
+
         private int _age;
 
         public int Age
@@ -36,6 +38,23 @@ namespace EvolutionView.Models.Organisms
         public float Points { get; set; }
 
         public List<Gene> GenesList { get; set; }
+
+        public Human(Human first_human, Human second_human, HumanWorld world)
+        {
+            GenesList = Enumerable.Repeat<Gene>(new Gene(), first_human.GenesList.Count).ToList();
+
+            SetGenesListByCrossover(first_human, second_human); 
+            
+            GetLifeExpectancy();
+
+            // Starting SetCalculating methods
+            SetAndCalculateHeight();
+
+            CalculatePoints(world);
+
+            first_human.NumbersOfChildren += 1;
+            second_human.NumbersOfChildren += 1;
+        }
 
         // Initialize full randomly
         public Human(int amount_of_genes, HumanWorld world)
@@ -72,6 +91,22 @@ namespace EvolutionView.Models.Organisms
                     Value = (byte)StaticVariables.Rand.Next(0, 2)
                 };
                 GenesList[i] = Gene;
+            }
+        }
+
+        public void SetGenesListByCrossover(Human first_human, Human second_human)
+        {
+            for (int i = 0; i < GenesList.Count; i++)
+            {
+                if (first_human.GenesList[i].Value == second_human.GenesList[i].Value)
+                    GenesList[i] = first_human.GenesList[i];
+                else
+                {
+                    Gene gene = new Gene();
+                    gene.Value = StaticVariables.Rand.Next(0, 2);
+                    GenesList[i] = gene;
+                }
+                    
             }
         }
 
