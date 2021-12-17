@@ -88,7 +88,8 @@ namespace EvolutionView.Models
                     CurrentYear += 1;
                     foreach (var human in HumanList)
                     {
-                        human.Age += 1;
+                        if (human.IsAlive) human.Age += 1;
+                        if (human.Age == human.LifeExpectancy) human.IsAlive = false;
                     }
                     Thread.Sleep(30);
                 }

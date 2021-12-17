@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EvolutionView.Models.BaseModels
 {
-    class CharacteristicParametrsDefault
+    static class CharacteristicParametrsDefault
     {
         public static bool IsActive = true;
         public static string Name;

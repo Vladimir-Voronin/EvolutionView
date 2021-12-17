@@ -24,7 +24,7 @@ namespace EvolutionView.Models.Worlds
         {
             if (height != null && height.Value.HasValue)
             {
-                return EvaluatePro.LinearFunction(HeightParametrsDefault.min_height, HeightParametrsDefault.max_height, 200, height.Value.Value);
+                return EvaluatePro.LinearFunctionFloat(HeightParametrsDefault.min_height, HeightParametrsDefault.max_height, 200, height.Value.Value);
             }
             return 0;
         }

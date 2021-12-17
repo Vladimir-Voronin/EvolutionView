@@ -36,7 +36,8 @@ namespace EvolutionView.ViewModels
         public Evolution EvolutionObject
         {
             get { return evolution_object; }
-            set { evolution_object = value;
+            set { 
+                evolution_object = value;
                 OnPropertyChanged();
             }
         }

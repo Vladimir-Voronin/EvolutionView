@@ -119,6 +119,8 @@
                                         Binding="{Binding genes_list.Count}" />
                     <DataGridTextColumn Header="Age"
                                         Binding="{Binding Age}" />
+                    <DataGridTextColumn Header="Life Expectancy"
+                                        Binding="{Binding LifeExpectancy}" />
                     <DataGridTextColumn Header="Points"
                                         Binding="{Binding Points}" />
                 </DataGrid.Columns>

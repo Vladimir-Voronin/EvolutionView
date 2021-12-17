@@ -7,6 +7,7 @@ using EvolutionView.Infrastructure.Interfaces;
 using EvolutionView.Infrastructure;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using EvolutionView.Infrastructure.HelpClasses;
 
 namespace EvolutionView.Models.Organisms
 {
@@ -15,6 +16,8 @@ namespace EvolutionView.Models.Organisms
         public static List<ICharacteristicParametrsDefault> HumanCharacteristicList { get; set; } = new List<ICharacteristicParametrsDefault>() { new HeightParametrsDefault() };
 
         public bool IsAlive { get; set; } = true;
+
+        public int LifeExpectancy { get; set; }
 
         private int _age;
 
@@ -42,27 +45,22 @@ namespace EvolutionView.Models.Organisms
 
             SetRandomlyGensList();
 
+            GetLifeExpectancy();
+
             // Starting SetCalculating methods
             SetAndCalculateHeight();
 
             CalculatePoints(world);
         }
 
-        #region Property changed logic
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string PropertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
-        }
-
-        #endregion
-
         public void CalculatePoints(HumanWorld world)
         {
             Points += world.CalculatePointsForHumanInThisWorld(this);
+        }
+
+        public void GetLifeExpectancy()
+        {
+            LifeExpectancy = EvaluatePro.LinearFunctionInt(HumanParametrsDefault.LifeCoeficients, HumanParametrsDefault.LifeValues);
         }
 
         public void SetRandomlyGensList()
@@ -96,6 +94,18 @@ namespace EvolutionView.Models.Organisms
                 int step = Convert.ToInt32((HeightParametrsDefault.max_height - HeightParametrsDefault.min_height) * percent_equals_to_1);
                 HeightObject.Value = Convert.ToInt32(HeightParametrsDefault.min_height + step);
             }
+        }
+
+        #endregion
+
+        #region Property changed logic
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string PropertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
         }
 
         #endregion
