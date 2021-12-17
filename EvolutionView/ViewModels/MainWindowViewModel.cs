@@ -14,14 +14,16 @@ using System.Windows.Threading;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace EvolutionView.ViewModels
 {
-    class MainWindowViewModel
+    class MainWindowViewModel : IDisposable, INotifyPropertyChanged
     {
         #region Properties
 
-        private ObservableCollection<Human> list_of_humans;
+        private ObservableCollection<Human> list_of_humans = Evolution.HumanList;
 
         public ObservableCollection<Human> ListOfHumans
         {
@@ -29,12 +31,14 @@ namespace EvolutionView.ViewModels
             set { list_of_humans = value; }
         }
 
-        private int current_year;
+        private Evolution evolution_object;
 
-        public int CurrentYear
+        public Evolution EvolutionObject
         {
-            get { return current_year; }
-            set { current_year = value; }
+            get { return evolution_object; }
+            set { evolution_object = value;
+                OnPropertyChanged();
+            }
         }
 
 
@@ -123,69 +127,126 @@ namespace EvolutionView.ViewModels
 
         #region Commands
 
-        public ICommand StartEvolutionCommand { get; }
+        public ICommand CreateEvolutionCommand { get; }
 
-        private bool CanStartEvolutionCommandExecute(object p) => true;
+        private bool CanCreateEvolutionCommandExecute(object p) => true;
 
-        private void OnStartEvolutionCommandExecuted(object p)
+        private void OnCreateEvolutionCommandExecuted(object p)
         {
             // Set Current Genes
             HeightParametrsDefault.CurrentGenes = GenesValueHeight;
 
-            ListOfHumans.Clear();
-            HumanFactory factory = new HumanFactory();
-            factory.SetSettings(new BasketballPlayersWorld());
+            EvolutionObject = new Evolution(new BasketballPlayersWorld(), NumberOfPeople);
+        }
 
-            for (int i = 0; i < NumberOfPeople; i++)
-            {
-                ListOfHumans.Add(factory.ReturnNewHuman());
-            }
+        public ICommand StartEvolutionCommand { get; }
 
-            Task t = Task.Run(StartEvolution);
+        private bool CanStartEvolutionCommandExecute(object p)
+        {
+            if (EvolutionObject != null) return true;
+            return false; 
+        }
+
+        private void OnStartEvolutionCommandExecuted(object p)
+        {
+            Evolution.RunInSeparateTask(EvolutionObject);
+        }
+
+        public ICommand ContinueEvolutionCommand { get; }
+
+        private bool CanContinueEvolutionCommandExecute(object p)
+        {
+            if (EvolutionObject != null) return true;
+            return false; 
+        }
+
+        private void OnContinueEvolutionCommandExecuted(object p)
+        {
+            EvolutionObject.ContinueEvolution();
+        }
+        
+        public ICommand PauseEvolutionCommand { get; }
+
+        private bool CanPauseEvolutionCommandExecute(object p)
+        {
+            if (EvolutionObject != null) return true;
+            return false; 
+        }
+
+        private void OnPauseEvolutionCommandExecuted(object p)
+        {
+            EvolutionObject.PauseEvolution();
         }
 
         #endregion
-
-        private void StartEvolution()
-        {
-            //while(!StopTheGame)
-            //{
-            //    Year += 1;
-            //}
-            for (int i = 0; i < 100; i++)
-            {
-                foreach (var human in ListOfHumans)
-                {
-                    human.Age += 1;
-                }
-                Thread.Sleep(10);
-            }
-        }
-
-        public void PauseEvolution()
-        {
-
-        }
-
-        public void ContinueEvolution()
-        {
-
-        }
-
-        public void StopEvolution()
-        {
-
-        }
 
         public MainWindowViewModel()
         {
             #region Commands
 
+            CreateEvolutionCommand = new ActionCommand(OnCreateEvolutionCommandExecuted, CanCreateEvolutionCommandExecute);
+
             StartEvolutionCommand = new ActionCommand(OnStartEvolutionCommandExecuted, CanStartEvolutionCommandExecute);
 
-            #endregion
+            ContinueEvolutionCommand = new ActionCommand(OnContinueEvolutionCommandExecuted, CanContinueEvolutionCommandExecute);
 
-            ListOfHumans = new ObservableCollection<Human>();
+            PauseEvolutionCommand = new ActionCommand(OnPauseEvolutionCommandExecuted, CanPauseEvolutionCommandExecute);
+
+            #endregion
         }
+
+        #region IDisposable Support
+
+        ~MainWindowViewModel()
+        {
+            Dispose(true);
+        }
+
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    Evolution.StopWork();
+                }
+
+                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+                // TODO: set large fields to null.
+
+                disposedValue = true;
+            }
+        }
+
+        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+        // ~MainWindowViewModel()
+        // {
+        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+        //   Dispose(false);
+        // }
+
+        // This code added to correctly implement the disposable pattern.
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
+
+        #region Property changed logic
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string PropertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+        }
+
+        #endregion
     }
 }
