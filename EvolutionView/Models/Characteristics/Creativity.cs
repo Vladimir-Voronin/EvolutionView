@@ -2,7 +2,7 @@
 
 namespace EvolutionView.Models.Characteristics
 {
-    class BodyPhysics : Сharacteristic
+    class Creativity : Сharacteristic
     {
         private int? _value;
 
@@ -11,13 +11,13 @@ namespace EvolutionView.Models.Characteristics
             get { return _value; }
             set
             {
-                if (value < BodyPhisicsParametrsDefault.min_value) _value = BodyPhisicsParametrsDefault.min_value;
-                else if (value > BodyPhisicsParametrsDefault.max_value) _value = BodyPhisicsParametrsDefault.max_value;
+                if (value < CreativityParametrsDefault.min_value) _value = CreativityParametrsDefault.min_value;
+                else if (value > CreativityParametrsDefault.max_value) _value = CreativityParametrsDefault.max_value;
                 else _value = value;
             }
         }
 
-        public BodyPhysics(GeneSeries genes)
+        public Creativity(GeneSeries genes)
         {
             GenesObject = genes;
         }

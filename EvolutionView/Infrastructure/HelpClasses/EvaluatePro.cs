@@ -97,7 +97,7 @@ namespace EvolutionView.Infrastructure.HelpClasses
 
         public static float LinearFunctionFloatByLists(List<(int, int)> coef, List<(int, int)> values, int current_value)
         {
-            if(current_value > 90)
+            if(current_value > 70)
             {
                 _ = 1;
             }
@@ -122,7 +122,10 @@ namespace EvolutionView.Infrastructure.HelpClasses
 
             else if(second_value > first_value)
             {
-                return LinearFunctionFloat(first_value, second_coef, second_value, current_value, true);
+                float step = (float)(second_value - first_value) / (second_coef - first_coef);
+                int shift = current_value - first_coef;
+                float a = first_value + (shift * step);
+                return first_value + (shift * step);
             }
             else
             {

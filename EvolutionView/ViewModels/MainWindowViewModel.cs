@@ -88,6 +88,30 @@ namespace EvolutionView.ViewModels
             get { return is_active_intelligence_characteristic = IntelligenceParametrsDefault.IsActive; }
             set { is_active_intelligence_characteristic = IntelligenceParametrsDefault.IsActive = value; }
         }
+        
+        private bool is_active_emotionality_characteristic = EmotionalityParametrsDefault.IsActive;
+
+        public bool IsActiveEmotionalityCharacteristic
+        {
+            get { return is_active_emotionality_characteristic = EmotionalityParametrsDefault.IsActive; }
+            set { is_active_emotionality_characteristic = EmotionalityParametrsDefault.IsActive = value; }
+        }
+        
+        private bool is_active_extroversion_characteristic = ExtroversionParametrsDefault.IsActive;
+
+        public bool IsActiveExtroversionCharacteristic
+        {
+            get { return is_active_extroversion_characteristic = ExtroversionParametrsDefault.IsActive; }
+            set { is_active_extroversion_characteristic = ExtroversionParametrsDefault.IsActive = value; }
+        }
+        
+        private bool is_active_creativity_characteristic = CreativityParametrsDefault.IsActive;
+
+        public bool IsActiveCreativityCharacteristic
+        {
+            get { return is_active_creativity_characteristic = CreativityParametrsDefault.IsActive; }
+            set { is_active_creativity_characteristic = CreativityParametrsDefault.IsActive = value; }
+        }
 
         #endregion
 
@@ -213,7 +237,7 @@ namespace EvolutionView.ViewModels
         
         private int min_genes_intellegence = IntelligenceParametrsDefault.min_genes;
 
-        public int MinGenesIntellegenceSlidery
+        public int MinGenesIntellegence
         {
             get { return min_genes_intellegence = IntelligenceParametrsDefault.min_genes; }
         }
@@ -231,6 +255,75 @@ namespace EvolutionView.ViewModels
         {
             get { return genes_value_intellegence; }
             set { genes_value_intellegence = value; }
+        }
+
+
+        private int min_genes_emotionality = EmotionalityParametrsDefault.min_genes;
+
+        public int MinGenesEmotionality
+        {
+            get { return min_genes_emotionality = EmotionalityParametrsDefault.min_genes; }
+        }
+
+        private int max_genes_emotionality = EmotionalityParametrsDefault.max_genes;
+
+        public int MaxGenesEmotionality
+        {
+            get { return max_genes_emotionality = EmotionalityParametrsDefault.max_genes; }
+        }
+
+        private int genes_value_emotionality;
+
+        public int GenesValueEmotionality
+        {
+            get { return genes_value_emotionality; }
+            set { genes_value_emotionality = value; }
+        }
+        
+        
+        private int min_genes_extroversion = ExtroversionParametrsDefault.min_genes;
+
+        public int MinGenesExtroversion
+        {
+            get { return min_genes_extroversion = ExtroversionParametrsDefault.min_genes; }
+        }
+
+        private int max_genes_extroversion = ExtroversionParametrsDefault.max_genes;
+
+        public int MaxGenesExtroversion
+        {
+            get { return max_genes_extroversion = ExtroversionParametrsDefault.max_genes; }
+        }
+
+        private int genes_value_extroversion;
+
+        public int GenesValueExtroversion
+        {
+            get { return genes_value_extroversion; }
+            set { genes_value_extroversion = value; }
+        }
+        
+        
+        private int min_genes_creativity = CreativityParametrsDefault.min_genes;
+
+        public int MinGenesCreativity
+        {
+            get { return min_genes_creativity = CreativityParametrsDefault.min_genes; }
+        }
+
+        private int max_genes_creativity = CreativityParametrsDefault.max_genes;
+
+        public int MaxGenesCreativity
+        {
+            get { return max_genes_creativity = CreativityParametrsDefault.max_genes; }
+        }
+
+        private int genes_value_creativity;
+
+        public int GenesValueCreativity
+        {
+            get { return genes_value_creativity; }
+            set { genes_value_creativity = value; }
         }
 
         #endregion
@@ -265,6 +358,9 @@ namespace EvolutionView.ViewModels
             BodyPhisicsParametrsDefault.CurrentGenes = GenesValueBodyPhysics;
             BeautyParametrsDefault.CurrentGenes = GenesValueBeauty;
             IntelligenceParametrsDefault.CurrentGenes = GenesValueIntellegence;
+            EmotionalityParametrsDefault.CurrentGenes = GenesValueEmotionality;
+            ExtroversionParametrsDefault.CurrentGenes = GenesValueExtroversion;
+            CreativityParametrsDefault.CurrentGenes = GenesValueCreativity;
 
             EvolutionObject = new Evolution(new BasketballPlayersWorld(), NumberOfPeople);
         }

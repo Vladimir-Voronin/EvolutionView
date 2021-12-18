@@ -152,31 +152,41 @@
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
                 <TextBlock  Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             FontSize="28"
                             Text="Characteristics Settings"/>
 
                 <CheckBox Grid.Row="1"
+                          Grid.Column="0"
                           Content="Height"
                           IsChecked="{Binding IsActiveHeightCharacteristic}">
                 </CheckBox>
                 
                 <Slider Grid.Row="1"
+                        Grid.Column="1"
                         Name="HeightSlider"
                         Width="650"
                         Height="25"
                         HorizontalAlignment="Left"
-                        Margin="180,0,0,0"
                         IsSnapToTickEnabled="True"
                         TickFrequency="1"
                         Minimum="{Binding MinGenesHeight}"
                         Maximum="{Binding MaxGenesHeight}"
                         Value="{Binding GenesValueHeight}">
                 </Slider>
-                
+
                 <TextBlock Grid.Row="1"
+                           Grid.Column="2"
                            Margin="0,0,50,0"
                            Text="{Binding ElementName=HeightSlider, Path=Value}"
                            Width="30"
@@ -187,25 +197,27 @@
 
                 
                 <CheckBox Grid.Row="2"
+                          Grid.Column="0"
                           Content="Body Physics"
                           IsChecked="{Binding IsActiveBodyPhysicsCharacteristic}">
 
                 </CheckBox>
                 
                 <Slider Grid.Row="2"
+                        Grid.Column="1"
                         Name="BodyPhysicsSlider"
                         Width="650"
                         Height="25"
                         HorizontalAlignment="Left"
-                        Margin="180,0,0,0"
                         IsSnapToTickEnabled="True"
                         TickFrequency="1"
                         Minimum="{Binding MinGenesBodyPhysics}"
                         Maximum="{Binding MaxGenesBodyPhysics}"
                         Value="{Binding GenesValueBodyPhysics}">
                 </Slider>
-                
+
                 <TextBlock Grid.Row="2"
+                           Grid.Column="2"
                            Margin="0,0,50,0"
                            Text="{Binding ElementName=BodyPhysicsSlider, Path=Value}"
                            Width="30"
@@ -215,24 +227,26 @@
                            FontSize="20"></TextBlock>
 
                 <CheckBox Grid.Row="3"
+                          Grid.Column="0"
                           Content="Beauty"
                           IsChecked="{Binding IsActiveBeautyCharacteristic}">
                 </CheckBox>
                 
                 <Slider Grid.Row="3"
+                        Grid.Column="1"
                         Name="BeautySlider"
                         Width="650"
                         Height="25"
                         HorizontalAlignment="Left"
-                        Margin="180,0,0,0"
                         IsSnapToTickEnabled="True"
                         TickFrequency="1"
                         Minimum="{Binding MinGenesBeauty}"
                         Maximum="{Binding MaxGenesBeauty}"
                         Value="{Binding GenesValueBeauty}">
                 </Slider>
-                
+
                 <TextBlock Grid.Row="3"
+                           Grid.Column="2"
                            Margin="0,0,50,0"
                            Text="{Binding ElementName=BeautySlider, Path=Value}"
                            Width="30"
@@ -240,29 +254,118 @@
                            HorizontalAlignment="Right"
                            TextAlignment="Center"
                            FontSize="20"></TextBlock>
-                
-                
+
+
                 <CheckBox Grid.Row="4"
+                          Grid.Column="0"
                           Content="Intellegence"
-                          IsChecked="{Binding IsActiveBeautyCharacteristic}">
+                          IsChecked="{Binding IsActiveIntelligenceCharacteristic}">
                 </CheckBox>
                 
                 <Slider Grid.Row="4"
+                        Grid.Column="1"
                         Name="IntellegenceSlider"
                         Width="650"
                         Height="25"
                         HorizontalAlignment="Left"
-                        Margin="180,0,0,0"
                         IsSnapToTickEnabled="True"
                         TickFrequency="1"
                         Minimum="{Binding MinGenesIntellegence}"
                         Maximum="{Binding MaxGenesIntellegence}"
                         Value="{Binding GenesValueIntellegence}">
                 </Slider>
-                
+
                 <TextBlock Grid.Row="4"
+                           Grid.Column="2"
                            Margin="0,0,50,0"
                            Text="{Binding ElementName=IntellegenceSlider, Path=Value}"
+                           Width="30"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Center"
+                           FontSize="20"></TextBlock>
+
+                <CheckBox Grid.Row="5"
+                          Grid.Column="0"
+                          Content="Emotionality"
+                          IsChecked="{Binding IsActiveEmotionalityCharacteristic}">
+                </CheckBox>
+                
+                <Slider Grid.Row="5"
+                        Grid.Column="1"
+                        Name="EmotionalitySlider"
+                        Width="650"
+                        Height="25"
+                        HorizontalAlignment="Left"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1"
+                        Minimum="{Binding MinGenesEmotionality}"
+                        Maximum="{Binding MaxGenesEmotionality}"
+                        Value="{Binding GenesValueEmotionality}">
+                </Slider>
+                
+                <TextBlock Grid.Row="5"
+                           Grid.Column="2"
+                           Margin="0,0,50,0"
+                           Text="{Binding ElementName=EmotionalitySlider, Path=Value}"
+                           Width="30"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Center"
+                           FontSize="20"></TextBlock>
+                
+                <CheckBox Grid.Row="6"
+                          Grid.Column="0"
+                          Content="Extoversion"
+                          IsChecked="{Binding IsActiveExtroversionCharacteristic}">
+                </CheckBox>
+                
+                <Slider Grid.Row="6"
+                        Grid.Column="1"
+                        Name="Extroversion"
+                        Width="650"
+                        Height="25"
+                        HorizontalAlignment="Left"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1"
+                        Minimum="{Binding MinGenesExtroversion}"
+                        Maximum="{Binding MaxGenesExtroversion}"
+                        Value="{Binding GenesValueExtroversion}">
+                </Slider>
+                
+                <TextBlock Grid.Row="6"
+                           Grid.Column="2"
+                           Margin="0,0,50,0"
+                           Text="{Binding ElementName=Extroversion, Path=Value}"
+                           Width="30"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Center"
+                           FontSize="20"></TextBlock>
+                
+                <CheckBox Grid.Row="7"
+                          Grid.Column="0"
+                          Content="Creativity"
+                          IsChecked="{Binding IsActiveCreativityCharacteristic}">
+                </CheckBox>
+                
+                <Slider Grid.Row="7"
+                        Grid.Column="1"
+                        Name="Creativity"
+                        Width="650"
+                        Height="25"
+                        HorizontalAlignment="Left"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1"
+                        Minimum="{Binding MinGenesCreativity}"
+                        Maximum="{Binding MaxGenesCreativity}"
+                        Value="{Binding GenesValueCreativity}">
+                </Slider>
+                
+                <TextBlock Grid.Row="7"
+                           Grid.Column="2"
+                           Margin="0,0,50,0"
+                           Text="{Binding ElementName=Creativity, Path=Value}"
                            Width="30"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"
@@ -292,11 +395,15 @@
                                         Binding="{Binding BeautyObject.Value}" />
                     <DataGridTextColumn Header="Intelligence"
                                         Binding="{Binding IntelligenceObject.Value}" />
+                    <DataGridTextColumn Header="Emotionality"
+                                        Binding="{Binding EmotionalityObject.Value}" />
+                    <DataGridTextColumn Header="Extroversion"
+                                        Binding="{Binding ExtroversionObject.Value}" />
+                    <DataGridTextColumn Header="Creativity"
+                                        Binding="{Binding CreativityObject.Value}" />
                     <DataGridTextColumn Header="Age"
                                         Binding="{Binding Age}" />
-                    <DataGridTextColumn Header="Life Expectancy"
-                                        Binding="{Binding LifeExpectancy}" />
-                    <DataGridTextColumn Header="Number of Children"
+                    <DataGridTextColumn Header="Children"
                                         Binding="{Binding NumbersOfChildren}" />
                     <DataGridTextColumn Header="Points"
                                         Binding="{Binding Points}" />

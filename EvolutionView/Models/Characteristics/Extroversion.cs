@@ -2,7 +2,7 @@
 
 namespace EvolutionView.Models.Characteristics
 {
-    class BodyPhysics : Сharacteristic
+    class Extroversion : Сharacteristic
     {
         private int? _value;
 
@@ -11,13 +11,13 @@ namespace EvolutionView.Models.Characteristics
             get { return _value; }
             set
             {
-                if (value < BodyPhisicsParametrsDefault.min_value) _value = BodyPhisicsParametrsDefault.min_value;
-                else if (value > BodyPhisicsParametrsDefault.max_value) _value = BodyPhisicsParametrsDefault.max_value;
+                if (value < ExtroversionParametrsDefault.min_value) _value = ExtroversionParametrsDefault.min_value;
+                else if (value > ExtroversionParametrsDefault.max_value) _value = ExtroversionParametrsDefault.max_value;
                 else _value = value;
             }
         }
 
-        public BodyPhysics(GeneSeries genes)
+        public Extroversion(GeneSeries genes)
         {
             GenesObject = genes;
         }

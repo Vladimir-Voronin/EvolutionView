@@ -50,6 +50,12 @@ namespace EvolutionView.Models.Organisms
 
         public Intelligence IntelligenceObject { get; set; }
 
+        public Emotionality EmotionalityObject { get; set; }
+
+        public Extroversion ExtroversionObject { get; set; }
+
+        public Creativity CreativityObject { get; set; }
+
         public float Points { get; set; }
 
         public List<Gene> GenesList { get; set; }
@@ -135,6 +141,9 @@ namespace EvolutionView.Models.Organisms
             SetAndCalculateBodyPhysics();
             SetAndCalculateBeauty();
             SetAndCalculateIntelligence();
+            SetAndCalculateEmotionality();
+            SetAndCalculateExtroversion();
+            SetAndCalculateCreativity();
         }
 
         public void SetAndCalculateHeight()
@@ -217,6 +226,69 @@ namespace EvolutionView.Models.Organisms
 
                 int step = Convert.ToInt32((IntelligenceParametrsDefault.max_value - IntelligenceParametrsDefault.min_value) * percent_equals_to_1);
                 IntelligenceObject.Value = Convert.ToInt32(IntelligenceParametrsDefault.min_value + step) + StaticVariables.Rand.Next(-shift, shift + 1);
+            }
+        }
+
+        public void SetAndCalculateEmotionality()
+        {
+            if (EmotionalityParametrsDefault.IsActive)
+            {
+                int shift = (EmotionalityParametrsDefault.max_value - EmotionalityParametrsDefault.min_value) / EmotionalityParametrsDefault.CurrentGenes / 2;
+                // Create new object
+                EmotionalityObject = EmotionalityParametrsDefault.ReturnNewCharacteristic();
+                // From GenesList set Serie to object
+                EmotionalityObject.GenesObject.Serie = GenesList.GetRange(EmotionalityParametrsDefault.StartIndex, EmotionalityParametrsDefault.EndIndex - EmotionalityParametrsDefault.StartIndex).ToArray();
+
+                // Calculate Height.Value
+                int amount_of_genes = EmotionalityParametrsDefault.EndIndex - EmotionalityParametrsDefault.StartIndex;
+
+                float percent_equals_to_1 = GenesList.GetRange(EmotionalityParametrsDefault.StartIndex, EmotionalityParametrsDefault.EndIndex - EmotionalityParametrsDefault.StartIndex).Count((x) => x.Value == 1) /
+                    (float)GenesList.GetRange(EmotionalityParametrsDefault.StartIndex, EmotionalityParametrsDefault.EndIndex - EmotionalityParametrsDefault.StartIndex).Count;
+
+                int step = Convert.ToInt32((EmotionalityParametrsDefault.max_value - EmotionalityParametrsDefault.min_value) * percent_equals_to_1);
+                EmotionalityObject.Value = Convert.ToInt32(EmotionalityParametrsDefault.min_value + step) + StaticVariables.Rand.Next(-shift, shift + 1);
+            }
+        }
+        
+        public void SetAndCalculateExtroversion()
+        {
+            if (ExtroversionParametrsDefault.IsActive)
+            {
+                int shift = (ExtroversionParametrsDefault.max_value - ExtroversionParametrsDefault.min_value) / ExtroversionParametrsDefault.CurrentGenes / 2;
+                // Create new object
+                ExtroversionObject = ExtroversionParametrsDefault.ReturnNewCharacteristic();
+                // From GenesList set Serie to object
+                ExtroversionObject.GenesObject.Serie = GenesList.GetRange(ExtroversionParametrsDefault.StartIndex, ExtroversionParametrsDefault.EndIndex - ExtroversionParametrsDefault.StartIndex).ToArray();
+
+                // Calculate Height.Value
+                int amount_of_genes = ExtroversionParametrsDefault.EndIndex - ExtroversionParametrsDefault.StartIndex;
+
+                float percent_equals_to_1 = GenesList.GetRange(ExtroversionParametrsDefault.StartIndex, ExtroversionParametrsDefault.EndIndex - ExtroversionParametrsDefault.StartIndex).Count((x) => x.Value == 1) /
+                    (float)GenesList.GetRange(ExtroversionParametrsDefault.StartIndex, ExtroversionParametrsDefault.EndIndex - ExtroversionParametrsDefault.StartIndex).Count;
+
+                int step = Convert.ToInt32((ExtroversionParametrsDefault.max_value - ExtroversionParametrsDefault.min_value) * percent_equals_to_1);
+                ExtroversionObject.Value = Convert.ToInt32(ExtroversionParametrsDefault.min_value + step) + StaticVariables.Rand.Next(-shift, shift + 1);
+            }
+        }
+        
+        public void SetAndCalculateCreativity()
+        {
+            if (CreativityParametrsDefault.IsActive)
+            {
+                int shift = (CreativityParametrsDefault.max_value - CreativityParametrsDefault.min_value) / CreativityParametrsDefault.CurrentGenes / 2;
+                // Create new object
+                CreativityObject = CreativityParametrsDefault.ReturnNewCharacteristic();
+                // From GenesList set Serie to object
+                CreativityObject.GenesObject.Serie = GenesList.GetRange(CreativityParametrsDefault.StartIndex, CreativityParametrsDefault.EndIndex - CreativityParametrsDefault.StartIndex).ToArray();
+
+                // Calculate Height.Value
+                int amount_of_genes = CreativityParametrsDefault.EndIndex - CreativityParametrsDefault.StartIndex;
+
+                float percent_equals_to_1 = GenesList.GetRange(CreativityParametrsDefault.StartIndex, CreativityParametrsDefault.EndIndex - CreativityParametrsDefault.StartIndex).Count((x) => x.Value == 1) /
+                    (float)GenesList.GetRange(CreativityParametrsDefault.StartIndex, CreativityParametrsDefault.EndIndex - CreativityParametrsDefault.StartIndex).Count;
+
+                int step = Convert.ToInt32((CreativityParametrsDefault.max_value - CreativityParametrsDefault.min_value) * percent_equals_to_1);
+                CreativityObject.Value = Convert.ToInt32(CreativityParametrsDefault.min_value + step) + StaticVariables.Rand.Next(-shift, shift + 1);
             }
         }
 

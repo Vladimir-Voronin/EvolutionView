@@ -19,6 +19,9 @@ namespace EvolutionView.Models.Worlds
             points += EvaluateBodyPhysics(human.BodyPhysicsObject);
             points += EvaluateBeauty(human.BeautyObject);
             points += EvaluateIntelligence(human.IntelligenceObject);
+            points += EvaluateEmotionality(human.EmotionalityObject);
+            points += EvaluateExtroversion(human.ExtroversionObject);
+            points += EvaluateCreativity(human.CreativityObject);
 
             return points;
         }
@@ -63,6 +66,50 @@ namespace EvolutionView.Models.Worlds
                 List<(int, int)> values = new List<(int, int)>() { (0, 100), (100, 100), (100, 70)};
 
                 return EvaluatePro.LinearFunctionFloatByLists(coeficients, values, intelligence.Value.Value);
+            }
+            return 0;
+        }
+
+        private float EvaluateEmotionality(Emotionality emotionality_physics)
+        {
+            if (emotionality_physics != null && emotionality_physics.Value.HasValue)
+            {
+                List<(int, int)> coeficients = new List<(int, int)>() { (EmotionalityParametrsDefault.min_value, Convert.ToInt32(EmotionalityParametrsDefault.max_value * 0.6)),
+                                                                            (Convert.ToInt32(EmotionalityParametrsDefault.max_value * 0.6), Convert.ToInt32(EmotionalityParametrsDefault.max_value * 0.8)),
+                                                                            (Convert.ToInt32(EmotionalityParametrsDefault.max_value * 0.8), EmotionalityParametrsDefault.max_value) };
+
+                List<(int, int)> values = new List<(int, int)>() { (100, 100), (100, 70), (70, 0) };
+
+                return EvaluatePro.LinearFunctionFloatByLists(coeficients, values, emotionality_physics.Value.Value);
+            }
+            return 0;
+        }
+        
+        private float EvaluateExtroversion(Extroversion extroversion_physics)
+        {
+            if (extroversion_physics != null && extroversion_physics.Value.HasValue)
+            {
+                List<(int, int)> coeficients = new List<(int, int)>() { (EmotionalityParametrsDefault.min_value, Convert.ToInt32(EmotionalityParametrsDefault.max_value * 0.2)),
+                                                                            (Convert.ToInt32(EmotionalityParametrsDefault.max_value * 0.2), Convert.ToInt32(EmotionalityParametrsDefault.max_value * 0.8)),
+                                                                            (Convert.ToInt32(EmotionalityParametrsDefault.max_value * 0.8), EmotionalityParametrsDefault.max_value) };
+
+                List<(int, int)> values = new List<(int, int)>() { (0, 60), (60, 60), (60, 0) };
+
+                return EvaluatePro.LinearFunctionFloatByLists(coeficients, values, extroversion_physics.Value.Value);
+            }
+            return 0;
+        }
+        
+        private float EvaluateCreativity(Creativity creativity_physics)
+        {
+            if (creativity_physics != null && creativity_physics.Value.HasValue)
+            {
+                List<(int, int)> coeficients = new List<(int, int)>() { (EmotionalityParametrsDefault.min_value, Convert.ToInt32(EmotionalityParametrsDefault.max_value * 0.7)),
+                                                                            (Convert.ToInt32(EmotionalityParametrsDefault.max_value * 0.7), EmotionalityParametrsDefault.max_value) };
+
+                List<(int, int)> values = new List<(int, int)>() { (0, 0), (0, 80) };
+
+                return EvaluatePro.LinearFunctionFloatByLists(coeficients, values, creativity_physics.Value.Value);
             }
             return 0;
         }

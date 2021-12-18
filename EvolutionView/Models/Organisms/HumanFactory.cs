@@ -72,6 +72,42 @@ namespace EvolutionView.Models.Organisms
 
                 start_index += IntelligenceParametrsDefault.CurrentGenes;
             }
+            
+            if(EmotionalityParametrsDefault.IsActive)
+            {
+                end_index += EmotionalityParametrsDefault.CurrentGenes;
+                GeneSeries gen_serias = new GeneSeries(EmotionalityParametrsDefault.CurrentGenes);
+
+                // Set Parametrs Default
+                EmotionalityParametrsDefault.StartIndex = start_index;
+                EmotionalityParametrsDefault.EndIndex = end_index;
+
+                start_index += EmotionalityParametrsDefault.CurrentGenes;
+            }
+            
+            if(ExtroversionParametrsDefault.IsActive)
+            {
+                end_index += ExtroversionParametrsDefault.CurrentGenes;
+                GeneSeries gen_serias = new GeneSeries(ExtroversionParametrsDefault.CurrentGenes);
+
+                // Set Parametrs Default
+                ExtroversionParametrsDefault.StartIndex = start_index;
+                ExtroversionParametrsDefault.EndIndex = end_index;
+
+                start_index += ExtroversionParametrsDefault.CurrentGenes;
+            }
+            
+            if(CreativityParametrsDefault.IsActive)
+            {
+                end_index += CreativityParametrsDefault.CurrentGenes;
+                GeneSeries gen_serias = new GeneSeries(CreativityParametrsDefault.CurrentGenes);
+
+                // Set Parametrs Default
+                CreativityParametrsDefault.StartIndex = start_index;
+                CreativityParametrsDefault.EndIndex = end_index;
+
+                start_index += CreativityParametrsDefault.CurrentGenes;
+            }
 
             AmountofGenes = end_index;
         }
