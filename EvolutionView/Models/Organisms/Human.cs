@@ -34,6 +34,8 @@ namespace EvolutionView.Models.Organisms
         }
 
         public Height HeightObject { get; set; }
+        
+        public BodyPhysics BodyPhysicsObject { get; set; }
 
         public float Points { get; set; }
 
@@ -48,7 +50,7 @@ namespace EvolutionView.Models.Organisms
             GetLifeExpectancy();
 
             // Starting SetCalculating methods
-            SetAndCalculateHeight();
+            SetAndCalculateAllCharacteristics();
 
             CalculatePoints(world);
 
@@ -67,10 +69,11 @@ namespace EvolutionView.Models.Organisms
             GetLifeExpectancy();
 
             // Starting SetCalculating methods
-            SetAndCalculateHeight();
+            SetAndCalculateAllCharacteristics();
 
             CalculatePoints(world);
         }
+
 
         public void CalculatePoints(HumanWorld world)
         {
@@ -112,6 +115,13 @@ namespace EvolutionView.Models.Organisms
 
         #region SetAndCalculateMethods
 
+
+        public void SetAndCalculateAllCharacteristics()
+        {
+            SetAndCalculateHeight();
+            SetAndCalculateBodyPhysics();
+        }
+
         public void SetAndCalculateHeight()
         {
             if (HeightParametrsDefault.IsActive)
@@ -129,6 +139,27 @@ namespace EvolutionView.Models.Organisms
 
                 int step = Convert.ToInt32((HeightParametrsDefault.max_value - HeightParametrsDefault.min_value) * percent_equals_to_1);
                 HeightObject.Value = Convert.ToInt32(HeightParametrsDefault.min_value + step) + StaticVariables.Rand.Next(-shift, shift + 1);
+            }
+        }
+        
+        public void SetAndCalculateBodyPhysics()
+        {
+            if (BodyPhisicsParametrsDefault.IsActive)
+            {
+                int shift = (BodyPhisicsParametrsDefault.max_value - BodyPhisicsParametrsDefault.min_value) / BodyPhisicsParametrsDefault.CurrentGenes / 2;
+                // Create new object
+                BodyPhysicsObject = BodyPhisicsParametrsDefault.ReturnNewCharacteristic();
+                // From GenesList set Serie to object
+                BodyPhysicsObject.GenesObject.Serie = GenesList.GetRange(BodyPhisicsParametrsDefault.StartIndex, BodyPhisicsParametrsDefault.EndIndex - BodyPhisicsParametrsDefault.StartIndex).ToArray();
+
+                // Calculate Height.Value
+                int amount_of_genes = BodyPhisicsParametrsDefault.EndIndex - BodyPhisicsParametrsDefault.StartIndex;
+
+                float percent_equals_to_1 = GenesList.GetRange(BodyPhisicsParametrsDefault.StartIndex, BodyPhisicsParametrsDefault.EndIndex - BodyPhisicsParametrsDefault.StartIndex).Count((x) => x.Value == 1) /
+                    (float)GenesList.GetRange(BodyPhisicsParametrsDefault.StartIndex, BodyPhisicsParametrsDefault.EndIndex - BodyPhisicsParametrsDefault.StartIndex).Count;
+
+                int step = Convert.ToInt32((BodyPhisicsParametrsDefault.max_value - BodyPhisicsParametrsDefault.min_value) * percent_equals_to_1);
+                BodyPhysicsObject.Value = Convert.ToInt32(BodyPhisicsParametrsDefault.min_value + step) + StaticVariables.Rand.Next(-shift, shift + 1);
             }
         }
 

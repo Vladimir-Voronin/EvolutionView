@@ -20,9 +20,9 @@ namespace EvolutionView.Models
 
         public static bool DeleteDeadHumans { get; set; } = true;
 
-        public static int DefaultDeathCoefficientPart { get; set; } = 30;
+        public static float DefaultDeathCoefficientPart { get; set; } = 1;
 
-        private int Deathcoefficient { get; set; }
+        private float Deathcoefficient { get; set; }
 
         private HumanWorld WorldType { get; set; }
 
@@ -33,6 +33,8 @@ namespace EvolutionView.Models
         private HumanFactory Factory { get; set; }
 
         private float MaxPointsInThisYear { get; set; } = 0;
+        
+        private float MinPointsInThisYear { get; set; } = float.MaxValue;
 
         private int current_year;
 
@@ -104,7 +106,7 @@ namespace EvolutionView.Models
                 if (!StopTheEvolution)
                 {
                     OneYearOfEvolution();
-                    Thread.Sleep(300);
+                    Thread.Sleep(100);
                 }
             }
         }
@@ -112,6 +114,7 @@ namespace EvolutionView.Models
         private void OneYearOfEvolution()
         {
             MaxPointsInThisYear = 0;
+            MinPointsInThisYear = float.MaxValue;
             CurrentYear += 1;
             
             foreach (var human in HumanList)
@@ -120,6 +123,7 @@ namespace EvolutionView.Models
                     {
                         human.Age += 1;
                         MaxPointsInThisYear = human.Points > MaxPointsInThisYear ? human.Points : MaxPointsInThisYear;
+                        MinPointsInThisYear = human.Points < MinPointsInThisYear ? human.Points : MinPointsInThisYear;
                     }
                     if (human.Age == human.LifeExpectancy)
                     {
@@ -157,9 +161,10 @@ namespace EvolutionView.Models
 
             if (AliveHumansInThisYear.Count > 1)
             {
+                float coef = MaxPointsInThisYear / 100;
                 for (int i = 0; i < AliveHumansInThisYear.Count(); i++)
                 {
-                    chance = AliveHumansInThisYear[i].Points / MaxPointsInThisYear / Deathcoefficient;
+                    chance = (AliveHumansInThisYear[i].Points - MinPointsInThisYear) / MaxPointsInThisYear / Deathcoefficient / coef;
                     randomFloat = (float)StaticVariables.Rand.NextDouble();
                     if (randomFloat < chance)
                     {
@@ -183,7 +188,7 @@ namespace EvolutionView.Models
             if(number_of_alive_humans > PopulationThreshold)
             {
                 int shift = Convert.ToInt32(PopulationThreshold * 0.1);
-                Deathcoefficient = DefaultDeathCoefficientPart + 1 + (number_of_alive_humans - PopulationThreshold) / shift;
+                Deathcoefficient = DefaultDeathCoefficientPart + 0.1f + (number_of_alive_humans - PopulationThreshold) / shift;
             }
             else
             {

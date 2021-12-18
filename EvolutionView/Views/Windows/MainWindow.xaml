@@ -140,33 +140,81 @@
                       VerticalAlignment="Top"
                       Margin="162,39,0,0"></ComboBox>
 
-            <GroupBox Grid.Row="2">
-                <DockPanel Height="25"
-                           VerticalAlignment="Top">
-                    <CheckBox Content="Name Of the characteristic"
-                              IsChecked="{Binding IsActiveHeightCharacteristic}">
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
-                    </CheckBox>
-                    <Slider Grid.Row="1"
-                            Name="Slider1"
-                            Width="500"
-                            Height="25"
-                            Margin="20,0,0,0"
-                            IsSnapToTickEnabled="True"
-                            TickFrequency="1"
-                            Minimum="{Binding MinGenesHeight}"
-                            Maximum="{Binding MaxGenesHeight}"
-                            Value="{Binding GenesValueHeight}">
-                    </Slider>
-                    <TextBlock Margin="20,0,0,0"
-                               Text="{Binding ElementName=Slider1, Path=Value}"
-                               Width="30"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Left"
-                               TextAlignment="Center"
-                               FontSize="20"></TextBlock>
-                </DockPanel>
-            </GroupBox>
+                <TextBlock  Grid.Row="0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            FontSize="28"
+                            Text="Characteristics Settings"/>
+
+                <CheckBox Grid.Row="1"
+                          Content="Height"
+                          IsChecked="{Binding IsActiveHeightCharacteristic}">
+                </CheckBox>
+                
+                <Slider Grid.Row="1"
+                        Name="HeightSlider"
+                        Width="650"
+                        Height="25"
+                        HorizontalAlignment="Left"
+                        Margin="180,0,0,0"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1"
+                        Minimum="{Binding MinGenesHeight}"
+                        Maximum="{Binding MaxGenesHeight}"
+                        Value="{Binding GenesValueHeight}">
+                </Slider>
+                
+                <TextBlock Grid.Row="1"
+                           Margin="0,0,50,0"
+                           Text="{Binding ElementName=HeightSlider, Path=Value}"
+                           Width="30"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Center"
+                           FontSize="20"></TextBlock>
+
+                
+                <CheckBox Grid.Row="2"
+                          Content="Body Physics"
+                          IsChecked="{Binding IsActiveBodyPhysicsCharacteristic}">
+
+                </CheckBox>
+                
+                <Slider Grid.Row="2"
+                        Name="BodyPhysicsSlider"
+                        Width="650"
+                        Height="25"
+                        HorizontalAlignment="Left"
+                        Margin="180,0,0,0"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1"
+                        Minimum="{Binding MinGenesBodyPhysics}"
+                        Maximum="{Binding MaxGenesBodyPhysics}"
+                        Value="{Binding GenesValueBodyPhysics}">
+                </Slider>
+                
+                <TextBlock Grid.Row="2"
+                           Margin="0,0,50,0"
+                           Text="{Binding ElementName=BodyPhysicsSlider, Path=Value}"
+                           Width="30"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Center"
+                           FontSize="20"></TextBlock>
+
+            </Grid>
         </Grid>
 
         <Grid Grid.Column="1"
@@ -183,6 +231,8 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Height"
                                         Binding="{Binding HeightObject.Value}" />
+                    <DataGridTextColumn Header="Body Physics"
+                                        Binding="{Binding BodyPhysicsObject.Value}" />
                     <DataGridTextColumn Header="Age"
                                         Binding="{Binding Age}" />
                     <DataGridTextColumn Header="Life Expectancy"

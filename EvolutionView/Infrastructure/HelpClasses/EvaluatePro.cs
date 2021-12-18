@@ -17,6 +17,30 @@ namespace EvolutionView.Infrastructure.HelpClasses
             else return (1 - percent) * max_points;
         }
 
+        public static float LinearFunctionFloatWithLocalMax(int min, int max, int max_points, int current_value, int local_max)
+        {
+            if (current_value > 90)
+            {
+                _ = 1;
+            }
+
+            local_max = local_max - min;
+            current_value = current_value - min;
+            float step =  max_points / (float)local_max;
+            if (current_value <= local_max)
+            {
+                float check = step * current_value;
+                return step * current_value;
+            }
+            else
+            {
+                float check = max_points - step * (current_value - local_max);
+                return max_points - step * (current_value - local_max);
+
+            }
+
+        }
+
         private static int LinearFunction(float first_coef, float second_coef, int first_val, int second_value, float search_coef)
         {
             second_coef = second_coef - first_coef;
