@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using EvolutionView.ViewModels.Base;
 
 namespace EvolutionView.ViewModels
 {
@@ -51,6 +52,17 @@ namespace EvolutionView.ViewModels
                 Evolution.DeleteDeadHumans = value;
             }
         }
+
+        public StatisticViewModel StatisticVM { get; set; }
+
+        public Visibility _should_show_statistic = Visibility.Collapsed;
+
+        public Visibility ShouldShowStatistic {
+            get { return _should_show_statistic; }
+            set { _should_show_statistic = value;
+                OnPropertyChanged();
+            }
+        } 
 
         #region GenesSettings
 
@@ -428,6 +440,18 @@ namespace EvolutionView.ViewModels
         {
             EvolutionObject.PauseEvolution();
         }
+        
+        public ICommand ChangeStatisticViewCommand { get; }
+
+        private bool CanChangeStatisticViewCommandExecute(object p) => true;
+
+        private void OnChangeStatisticViewCommandExecuted(object p)
+        {
+            if (ShouldShowStatistic == Visibility.Collapsed)
+                ShouldShowStatistic = Visibility.Visible;
+            else
+                ShouldShowStatistic = Visibility.Collapsed;
+        }
 
         #endregion
 
@@ -443,7 +467,11 @@ namespace EvolutionView.ViewModels
 
             PauseEvolutionCommand = new ActionCommand(OnPauseEvolutionCommandExecuted, CanPauseEvolutionCommandExecute);
 
+            ChangeStatisticViewCommand = new ActionCommand(OnChangeStatisticViewCommandExecuted, CanChangeStatisticViewCommandExecute);
+
             #endregion
+
+            StatisticVM = new StatisticViewModel();
         }
 
         #region IDisposable Support

@@ -39,7 +39,7 @@
                 <RowDefinition Height="2*" />
                 <RowDefinition Height="3*" />
             </Grid.RowDefinitions>
-            
+
             <TextBlock Grid.Row="0"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Top"
@@ -49,7 +49,7 @@
                        TextAlignment="Center"
                        FontSize="20"
                        Text="{Binding ListOfHumans.Count}" />
-            
+
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
@@ -188,9 +188,9 @@
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="8*"/>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="8*" />
+                    <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
 
                 <TextBlock  Grid.Row="0"
@@ -199,14 +199,14 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             FontSize="28"
-                            Text="Characteristics Settings"/>
+                            Text="Characteristics Settings" />
 
                 <CheckBox Grid.Row="1"
                           Grid.Column="0"
                           Content="Height"
                           IsChecked="{Binding IsActiveHeightCharacteristic}">
                 </CheckBox>
-                
+
                 <Slider Grid.Row="1"
                         Grid.Column="1"
                         Name="HeightSlider"
@@ -230,14 +230,14 @@
                            TextAlignment="Center"
                            FontSize="20"></TextBlock>
 
-                
+
                 <CheckBox Grid.Row="2"
                           Grid.Column="0"
                           Content="Body Physics"
                           IsChecked="{Binding IsActiveBodyPhysicsCharacteristic}">
 
                 </CheckBox>
-                
+
                 <Slider Grid.Row="2"
                         Grid.Column="1"
                         Name="BodyPhysicsSlider"
@@ -266,7 +266,7 @@
                           Content="Beauty"
                           IsChecked="{Binding IsActiveBeautyCharacteristic}">
                 </CheckBox>
-                
+
                 <Slider Grid.Row="3"
                         Grid.Column="1"
                         Name="BeautySlider"
@@ -296,7 +296,7 @@
                           Content="Intellegence"
                           IsChecked="{Binding IsActiveIntelligenceCharacteristic}">
                 </CheckBox>
-                
+
                 <Slider Grid.Row="4"
                         Grid.Column="1"
                         Name="IntellegenceSlider"
@@ -325,7 +325,7 @@
                           Content="Emotionality"
                           IsChecked="{Binding IsActiveEmotionalityCharacteristic}">
                 </CheckBox>
-                
+
                 <Slider Grid.Row="5"
                         Grid.Column="1"
                         Name="EmotionalitySlider"
@@ -338,7 +338,7 @@
                         Maximum="{Binding MaxGenesEmotionality}"
                         Value="{Binding GenesValueEmotionality}">
                 </Slider>
-                
+
                 <TextBlock Grid.Row="5"
                            Grid.Column="2"
                            Margin="0,0,50,0"
@@ -348,13 +348,13 @@
                            HorizontalAlignment="Right"
                            TextAlignment="Center"
                            FontSize="20"></TextBlock>
-                
+
                 <CheckBox Grid.Row="6"
                           Grid.Column="0"
                           Content="Extoversion"
                           IsChecked="{Binding IsActiveExtroversionCharacteristic}">
                 </CheckBox>
-                
+
                 <Slider Grid.Row="6"
                         Grid.Column="1"
                         Name="Extroversion"
@@ -367,7 +367,7 @@
                         Maximum="{Binding MaxGenesExtroversion}"
                         Value="{Binding GenesValueExtroversion}">
                 </Slider>
-                
+
                 <TextBlock Grid.Row="6"
                            Grid.Column="2"
                            Margin="0,0,50,0"
@@ -377,13 +377,13 @@
                            HorizontalAlignment="Right"
                            TextAlignment="Center"
                            FontSize="20"></TextBlock>
-                
+
                 <CheckBox Grid.Row="7"
                           Grid.Column="0"
                           Content="Creativity"
                           IsChecked="{Binding IsActiveCreativityCharacteristic}">
                 </CheckBox>
-                
+
                 <Slider Grid.Row="7"
                         Grid.Column="1"
                         Name="Creativity"
@@ -396,7 +396,7 @@
                         Maximum="{Binding MaxGenesCreativity}"
                         Value="{Binding GenesValueCreativity}">
                 </Slider>
-                
+
                 <TextBlock Grid.Row="7"
                            Grid.Column="2"
                            Margin="0,0,50,0"
@@ -418,33 +418,51 @@
                 <RowDefinition Height="200" />
             </Grid.RowDefinitions>
 
-            <DataGrid Grid.Row="0"
-                      ItemsSource="{Binding ListOfHumans}"
-                      AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Height"
-                                        Binding="{Binding HeightObject.Value}" />
-                    <DataGridTextColumn Header="Body Physics"
-                                        Binding="{Binding BodyPhysicsObject.Value}" />
-                    <DataGridTextColumn Header="Beauty"
-                                        Binding="{Binding BeautyObject.Value}" />
-                    <DataGridTextColumn Header="Intelligence"
-                                        Binding="{Binding IntelligenceObject.Value}" />
-                    <DataGridTextColumn Header="Emotionality"
-                                        Binding="{Binding EmotionalityObject.Value}" />
-                    <DataGridTextColumn Header="Extroversion"
-                                        Binding="{Binding ExtroversionObject.Value}" />
-                    <DataGridTextColumn Header="Creativity"
-                                        Binding="{Binding CreativityObject.Value}" />
-                    <DataGridTextColumn Header="Age"
-                                        Binding="{Binding Age}" />
-                    <DataGridTextColumn Header="Children"
-                                        Binding="{Binding NumbersOfChildren}" />
-                    <DataGridTextColumn Header="Points"
-                                        Binding="{Binding Points}" />
-                </DataGrid.Columns>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
 
-            </DataGrid>
+
+                <Button Grid.Column="0"
+                        Height="Auto"
+                        HorizontalAlignment="Left"
+                        Width="15"
+                        Command="{Binding ChangeStatisticViewCommand}">
+                </Button>
+
+                <DataGrid Grid.Row="0"
+                          Grid.Column="1"
+                          ItemsSource="{Binding ListOfHumans}"
+                          AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Height"
+                                            Binding="{Binding HeightObject.Value}" />
+                        <DataGridTextColumn Header="Body Physics"
+                                            Binding="{Binding BodyPhysicsObject.Value}" />
+                        <DataGridTextColumn Header="Beauty"
+                                            Binding="{Binding BeautyObject.Value}" />
+                        <DataGridTextColumn Header="Intelligence"
+                                            Binding="{Binding IntelligenceObject.Value}" />
+                        <DataGridTextColumn Header="Emotionality"
+                                            Binding="{Binding EmotionalityObject.Value}" />
+                        <DataGridTextColumn Header="Extroversion"
+                                            Binding="{Binding ExtroversionObject.Value}" />
+                        <DataGridTextColumn Header="Creativity"
+                                            Binding="{Binding CreativityObject.Value}" />
+                        <DataGridTextColumn Header="Age"
+                                            Binding="{Binding Age}" />
+                        <DataGridTextColumn Header="Children"
+                                            Binding="{Binding NumbersOfChildren}" />
+                        <DataGridTextColumn Header="Points"
+                                            Binding="{Binding Points, StringFormat={}{0:F2}}" />
+                    </DataGrid.Columns>
+
+                </DataGrid>
+            </Grid>
+
+
 
             <Button Grid.Row="1"
                     Width="100"
@@ -502,7 +520,20 @@
                     FontSize="24"
                     Foreground="Black"
                     Command="{Binding CreateEvolutionCommand}" />
+
+
         </Grid>
 
+        <ContentControl Grid.Row="1"
+                        Grid.Column="0"
+                        Name="StatisticsPopup"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Width="800"
+                        Height="830"
+                        Visibility="{Binding ShouldShowStatistic}"
+                        Background="#89BFEC"
+                        Content="{Binding StatisticVM}">
+        </ContentControl>
     </Grid>
 </Window>

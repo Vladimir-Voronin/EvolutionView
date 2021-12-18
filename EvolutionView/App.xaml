@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:EvolutionView"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:subwindows="clr-namespace:EvolutionView.Views.SubWindows"
+             xmlns:viewModels="clr-namespace:EvolutionView.ViewModels"
              StartupUri="Views/Windows/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -12,6 +14,12 @@
                                              SecondaryColor="Lime" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            
+            <DataTemplate DataType="{x:Type viewModels:StatisticViewModel}">
+                <subwindows:Statistic />
+            </DataTemplate>
+
         </ResourceDictionary>
+        
     </Application.Resources>
 </Application>
