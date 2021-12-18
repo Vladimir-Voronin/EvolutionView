@@ -2,7 +2,7 @@
 
 namespace EvolutionView.Models.Characteristics
 {
-    class BodyPhysics : Сharacteristic
+    class BodyPhysics : Characteristic
     {
         private int? _value;
 

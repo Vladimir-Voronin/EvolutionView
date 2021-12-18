@@ -54,6 +54,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="70" />
                     <RowDefinition Height="70" />
+                    <RowDefinition Height="70" />
                     <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
 
@@ -115,6 +116,40 @@
                 <TextBlock Grid.Row="1"
                            Margin="0,10,10,10"
                            Text="{Binding ElementName=PopulationThreshold, Path=Value}"
+                           Width="140"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Left"
+                           FontSize="20"></TextBlock>
+
+
+
+                <TextBlock Grid.Row="2"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Width="700"
+                           Height="25"
+                           Margin="60,0,0,0"
+                           Text="Number of mutation genes"
+                           FontSize="16" />
+
+                <Slider Grid.Row="2"
+                        Name="Mutations"
+                        HorizontalAlignment="Left"
+                        Width="700"
+                        Height="25"
+                        Margin="60,30,0,0"
+                        VerticalAlignment="Top"
+                        Minimum="{Binding MinimumMutations}"
+                        Maximum="{Binding MaximumMutations}"
+                        Value="{Binding MutationsValue}"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1">
+                </Slider>
+
+                <TextBlock Grid.Row="2"
+                           Margin="0,10,10,10"
+                           Text="{Binding ElementName=Mutations, Path=Value}"
                            Width="140"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"

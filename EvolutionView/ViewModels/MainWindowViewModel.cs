@@ -163,6 +163,31 @@ namespace EvolutionView.ViewModels
                 Evolution.PopulationThreshold = value;
             }
         }
+        
+        private readonly int minimum_mutations = MutationsParametrsDefault.min_value;
+
+        public int MinimumMutations
+        {
+            get { return minimum_mutations; }
+        }
+
+        private readonly int maximum_mutations = MutationsParametrsDefault.max_value;
+
+        public int MaximumMutations
+        {
+            get { return maximum_mutations; }
+        }
+
+        private int mutations_value = MutationsParametrsDefault.CurrentValue;
+
+        public int MutationsValue
+        {
+            get { return mutations_value; }
+            set {
+                mutations_value = value;
+                MutationsParametrsDefault.CurrentValue = value;
+            }
+        }
 
         #endregion
 

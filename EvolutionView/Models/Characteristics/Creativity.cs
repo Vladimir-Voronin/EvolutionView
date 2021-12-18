@@ -2,7 +2,7 @@
 
 namespace EvolutionView.Models.Characteristics
 {
-    class Creativity : Сharacteristic
+    class Creativity : Characteristic
     {
         private int? _value;
 

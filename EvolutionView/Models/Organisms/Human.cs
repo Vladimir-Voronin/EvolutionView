@@ -64,8 +64,10 @@ namespace EvolutionView.Models.Organisms
         {
             GenesList = Enumerable.Repeat<Gene>(new Gene(), first_human.GenesList.Count).ToList();
 
-            SetGenesListByCrossover(first_human, second_human); 
-            
+            SetGenesListByCrossover(first_human, second_human);
+
+            MutateGenesList();
+
             GetLifeExpectancy();
 
             // Starting SetCalculating methods
@@ -84,6 +86,8 @@ namespace EvolutionView.Models.Organisms
             GenesList = Enumerable.Repeat<Gene>(new Gene(), amount_of_genes).ToList();
 
             SetRandomlyGensList();
+
+            MutateGenesList();
 
             GetLifeExpectancy();
 
@@ -108,11 +112,24 @@ namespace EvolutionView.Models.Organisms
         {
             for (int i = 0; i < GenesList.Count; i++)
             {
-                Gene Gene = new Gene
+                Gene gene = new Gene
                 {
                     Value = (byte)StaticVariables.Rand.Next(0, 2)
                 };
-                GenesList[i] = Gene;
+                GenesList[i] = gene;
+            }
+        }
+
+        public void MutateGenesList()
+        {
+            for (int i = 0; i < MutationsParametrsDefault.CurrentValue; i++)
+            {
+                int number_of_mutate = StaticVariables.Rand.Next(0, GenesList.Count);
+                Gene gene = new Gene
+                {
+                    Value = (byte)StaticVariables.Rand.Next(0, 2)
+                };
+                GenesList[number_of_mutate] = gene;
             }
         }
 

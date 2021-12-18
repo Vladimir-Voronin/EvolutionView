@@ -2,7 +2,7 @@
 
 namespace EvolutionView.Models.Characteristics
 {
-    class Emotionality : Сharacteristic
+    class Emotionality : Characteristic
     {
         private int? _value;
 

@@ -2,7 +2,7 @@
 
 namespace EvolutionView.Models.Characteristics
 {
-    class Height : Сharacteristic
+    class Height : Characteristic
     {
         private int? _value;
 

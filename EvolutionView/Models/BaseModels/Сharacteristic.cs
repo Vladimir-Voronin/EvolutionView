@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EvolutionView.Models.BaseModels
 {
-    class Сharacteristic
+    class Characteristic
     {
         public GeneSeries GenesObject { get; set; }
     }

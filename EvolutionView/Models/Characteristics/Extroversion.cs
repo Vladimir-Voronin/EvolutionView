@@ -2,7 +2,7 @@
 
 namespace EvolutionView.Models.Characteristics
 {
-    class Extroversion : Сharacteristic
+    class Extroversion : Characteristic
     {
         private int? _value;
 
