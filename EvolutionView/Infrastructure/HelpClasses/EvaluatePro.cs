@@ -16,6 +16,16 @@ namespace EvolutionView.Infrastructure.HelpClasses
             if (IsUpper) return percent * max_points;
             else return (1 - percent) * max_points;
         }
+        
+        public static float LinearFunctionFloatWithFlatMax(int min, int max, int max_points, int current_value, int flat_value)
+        {
+            if (current_value >= flat_value) return max_points;
+
+            flat_value = flat_value - min;
+            current_value = current_value - min;
+            float percent = (float)current_value / flat_value;
+            return percent * max_points;
+        }
 
         public static float LinearFunctionFloatWithLocalMax(int min, int max, int max_points, int current_value, int local_max)
         {

@@ -16,6 +16,7 @@ namespace EvolutionView.Models.Worlds
 
             points += EvaluateHeight(human.HeightObject);
             points += EvaluateBodyPhysics(human.BodyPhysicsObject);
+            points += EvaluateBeauty(human.BeautyObject);
 
             return points;
         }
@@ -36,6 +37,15 @@ namespace EvolutionView.Models.Worlds
             if (body_physics != null && body_physics.Value.HasValue)
             {
                 return EvaluatePro.LinearFunctionFloatWithLocalMax(BodyPhisicsParametrsDefault.min_value, BodyPhisicsParametrsDefault.max_value, 150, body_physics.Value.Value, Convert.ToInt32(BodyPhisicsParametrsDefault.max_value * 0.9));
+            }
+            return 0;
+        }
+        
+        private float EvaluateBeauty(Beauty body_physics)
+        {
+            if (body_physics != null && body_physics.Value.HasValue)
+            {
+                return EvaluatePro.LinearFunctionFloatWithFlatMax(BodyPhisicsParametrsDefault.min_value, BodyPhisicsParametrsDefault.max_value, 50, body_physics.Value.Value, Convert.ToInt32(BeautyParametrsDefault.max_value * 0.3));
             }
             return 0;
         }

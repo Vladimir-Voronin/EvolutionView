@@ -72,6 +72,14 @@ namespace EvolutionView.ViewModels
             get { return is_active_body_physics_characteristic = BodyPhisicsParametrsDefault.IsActive; }
             set { is_active_body_physics_characteristic = BodyPhisicsParametrsDefault.IsActive = value; }
         }
+        
+        private bool is_active_beauty_characteristic = BeautyParametrsDefault.IsActive;
+
+        public bool IsActiveBeautyCharacteristic
+        {
+            get { return is_active_body_physics_characteristic = BeautyParametrsDefault.IsActive; }
+            set { is_active_body_physics_characteristic = BeautyParametrsDefault.IsActive = value; }
+        }
 
         #endregion
 
@@ -172,6 +180,28 @@ namespace EvolutionView.ViewModels
             get { return genes_value_body_physics; }
             set { genes_value_body_physics = value; }
         }
+        
+        private int min_genes_beauty = BeautyParametrsDefault.min_genes;
+
+        public int MinGenesBeauty
+        {
+            get { return min_genes_beauty = BeautyParametrsDefault.min_genes; }
+        }
+
+        private int max_genes_beauty = BeautyParametrsDefault.max_genes;
+
+        public int MaxGenesBeauty
+        {
+            get { return max_genes_beauty = BeautyParametrsDefault.max_genes; }
+        }
+
+        private int genes_value_beauty;
+
+        public int GenesValueBeauty
+        {
+            get { return genes_value_beauty; }
+            set { genes_value_beauty = value; }
+        }
 
         #endregion
 
@@ -203,6 +233,7 @@ namespace EvolutionView.ViewModels
             // Set Current Genes
             HeightParametrsDefault.CurrentGenes = GenesValueHeight;
             BodyPhisicsParametrsDefault.CurrentGenes = GenesValueBodyPhysics;
+            BeautyParametrsDefault.CurrentGenes = GenesValueBeauty;
 
             EvolutionObject = new Evolution(new BasketballPlayersWorld(), NumberOfPeople);
         }

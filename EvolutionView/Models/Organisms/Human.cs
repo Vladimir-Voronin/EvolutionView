@@ -19,7 +19,16 @@ namespace EvolutionView.Models.Organisms
 
         public int LifeExpectancy { get; set; }
 
-        public int NumbersOfChildren { get; set; }
+        private int _number_of_children;
+
+        public int NumbersOfChildren {
+            get { return _number_of_children; }
+            set
+            {
+                _number_of_children = value;
+                OnPropertyChanged();
+            }
+        }
 
         private int _age;
 
@@ -36,6 +45,8 @@ namespace EvolutionView.Models.Organisms
         public Height HeightObject { get; set; }
         
         public BodyPhysics BodyPhysicsObject { get; set; }
+
+        public Beauty BeautyObject { get; set; }
 
         public float Points { get; set; }
 
@@ -120,6 +131,7 @@ namespace EvolutionView.Models.Organisms
         {
             SetAndCalculateHeight();
             SetAndCalculateBodyPhysics();
+            SetAndCalculateBeauty();
         }
 
         public void SetAndCalculateHeight()
@@ -160,6 +172,27 @@ namespace EvolutionView.Models.Organisms
 
                 int step = Convert.ToInt32((BodyPhisicsParametrsDefault.max_value - BodyPhisicsParametrsDefault.min_value) * percent_equals_to_1);
                 BodyPhysicsObject.Value = Convert.ToInt32(BodyPhisicsParametrsDefault.min_value + step) + StaticVariables.Rand.Next(-shift, shift + 1);
+            }
+        }
+        
+        public void SetAndCalculateBeauty()
+        {
+            if (BeautyParametrsDefault.IsActive)
+            {
+                int shift = (BeautyParametrsDefault.max_value - BeautyParametrsDefault.min_value) / BeautyParametrsDefault.CurrentGenes / 2;
+                // Create new object
+                BeautyObject = BeautyParametrsDefault.ReturnNewCharacteristic();
+                // From GenesList set Serie to object
+                BeautyObject.GenesObject.Serie = GenesList.GetRange(BeautyParametrsDefault.StartIndex, BeautyParametrsDefault.EndIndex - BeautyParametrsDefault.StartIndex).ToArray();
+
+                // Calculate Height.Value
+                int amount_of_genes = BeautyParametrsDefault.EndIndex - BeautyParametrsDefault.StartIndex;
+
+                float percent_equals_to_1 = GenesList.GetRange(BeautyParametrsDefault.StartIndex, BeautyParametrsDefault.EndIndex - BeautyParametrsDefault.StartIndex).Count((x) => x.Value == 1) /
+                    (float)GenesList.GetRange(BeautyParametrsDefault.StartIndex, BeautyParametrsDefault.EndIndex - BeautyParametrsDefault.StartIndex).Count;
+
+                int step = Convert.ToInt32((BeautyParametrsDefault.max_value - BeautyParametrsDefault.min_value) * percent_equals_to_1);
+                BeautyObject.Value = Convert.ToInt32(BeautyParametrsDefault.min_value + step) + StaticVariables.Rand.Next(-shift, shift + 1);
             }
         }
 

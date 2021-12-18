@@ -214,6 +214,33 @@
                            TextAlignment="Center"
                            FontSize="20"></TextBlock>
 
+                <CheckBox Grid.Row="3"
+                          Content="Body Physics"
+                          IsChecked="{Binding IsActiveBeautyCharacteristic}">
+                </CheckBox>
+                
+                <Slider Grid.Row="3"
+                        Name="BeautySlider"
+                        Width="650"
+                        Height="25"
+                        HorizontalAlignment="Left"
+                        Margin="180,0,0,0"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1"
+                        Minimum="{Binding MinGenesBeauty}"
+                        Maximum="{Binding MaxGenesBeauty}"
+                        Value="{Binding GenesValueBeauty}">
+                </Slider>
+                
+                <TextBlock Grid.Row="3"
+                           Margin="0,0,50,0"
+                           Text="{Binding ElementName=BeautySlider, Path=Value}"
+                           Width="30"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Center"
+                           FontSize="20"></TextBlock>
+
             </Grid>
         </Grid>
 
@@ -233,10 +260,14 @@
                                         Binding="{Binding HeightObject.Value}" />
                     <DataGridTextColumn Header="Body Physics"
                                         Binding="{Binding BodyPhysicsObject.Value}" />
+                    <DataGridTextColumn Header="Beauty"
+                                        Binding="{Binding BeautyObject.Value}" />
                     <DataGridTextColumn Header="Age"
                                         Binding="{Binding Age}" />
                     <DataGridTextColumn Header="Life Expectancy"
                                         Binding="{Binding LifeExpectancy}" />
+                    <DataGridTextColumn Header="Number of Children"
+                                        Binding="{Binding NumbersOfChildren}" />
                     <DataGridTextColumn Header="Points"
                                         Binding="{Binding Points}" />
                 </DataGrid.Columns>

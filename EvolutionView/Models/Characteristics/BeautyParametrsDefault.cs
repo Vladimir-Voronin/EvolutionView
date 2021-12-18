@@ -2,10 +2,10 @@
 
 namespace EvolutionView.Models.Characteristics
 {
-    class BodyPhisicsParametrsDefault : ICharacteristicParametrsDefault
+    class BeautyParametrsDefault : ICharacteristicParametrsDefault
     {
         public static bool IsActive = true;
-        public static string Name = "Body Physics";
+        public static string Name = "Beauty";
         public static readonly int min_value = 0;
         public static readonly int max_value = 100;
         public static readonly int min_genes = 5;
@@ -27,10 +27,10 @@ namespace EvolutionView.Models.Characteristics
             }
         }
 
-        public static BodyPhysics ReturnNewCharacteristic()
+        public static Beauty ReturnNewCharacteristic()
         {
             GeneSeries g = new GeneSeries(CurrentGenes);
-            return new BodyPhysics(g);
+            return new Beauty(g);
         }
     }
 }

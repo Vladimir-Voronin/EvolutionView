@@ -48,6 +48,18 @@ namespace EvolutionView.Models.Organisms
 
                 start_index += BodyPhisicsParametrsDefault.CurrentGenes;
             }
+            
+            if(BeautyParametrsDefault.IsActive)
+            {
+                end_index += BeautyParametrsDefault.CurrentGenes;
+                GeneSeries gen_serias = new GeneSeries(BeautyParametrsDefault.CurrentGenes);
+
+                // Set Parametrs Default
+                BeautyParametrsDefault.StartIndex = start_index;
+                BeautyParametrsDefault.EndIndex = end_index;
+
+                start_index += BeautyParametrsDefault.CurrentGenes;
+            }
 
             AmountofGenes = end_index;
         }
