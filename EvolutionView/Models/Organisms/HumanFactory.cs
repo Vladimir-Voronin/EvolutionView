@@ -60,6 +60,18 @@ namespace EvolutionView.Models.Organisms
 
                 start_index += BeautyParametrsDefault.CurrentGenes;
             }
+            
+            if(IntelligenceParametrsDefault.IsActive)
+            {
+                end_index += IntelligenceParametrsDefault.CurrentGenes;
+                GeneSeries gen_serias = new GeneSeries(IntelligenceParametrsDefault.CurrentGenes);
+
+                // Set Parametrs Default
+                IntelligenceParametrsDefault.StartIndex = start_index;
+                IntelligenceParametrsDefault.EndIndex = end_index;
+
+                start_index += IntelligenceParametrsDefault.CurrentGenes;
+            }
 
             AmountofGenes = end_index;
         }

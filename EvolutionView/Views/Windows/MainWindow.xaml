@@ -215,7 +215,7 @@
                            FontSize="20"></TextBlock>
 
                 <CheckBox Grid.Row="3"
-                          Content="Body Physics"
+                          Content="Beauty"
                           IsChecked="{Binding IsActiveBeautyCharacteristic}">
                 </CheckBox>
                 
@@ -235,6 +235,34 @@
                 <TextBlock Grid.Row="3"
                            Margin="0,0,50,0"
                            Text="{Binding ElementName=BeautySlider, Path=Value}"
+                           Width="30"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Center"
+                           FontSize="20"></TextBlock>
+                
+                
+                <CheckBox Grid.Row="4"
+                          Content="Intellegence"
+                          IsChecked="{Binding IsActiveBeautyCharacteristic}">
+                </CheckBox>
+                
+                <Slider Grid.Row="4"
+                        Name="IntellegenceSlider"
+                        Width="650"
+                        Height="25"
+                        HorizontalAlignment="Left"
+                        Margin="180,0,0,0"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1"
+                        Minimum="{Binding MinGenesIntellegence}"
+                        Maximum="{Binding MaxGenesIntellegence}"
+                        Value="{Binding GenesValueIntellegence}">
+                </Slider>
+                
+                <TextBlock Grid.Row="4"
+                           Margin="0,0,50,0"
+                           Text="{Binding ElementName=IntellegenceSlider, Path=Value}"
                            Width="30"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"
@@ -262,6 +290,8 @@
                                         Binding="{Binding BodyPhysicsObject.Value}" />
                     <DataGridTextColumn Header="Beauty"
                                         Binding="{Binding BeautyObject.Value}" />
+                    <DataGridTextColumn Header="Intelligence"
+                                        Binding="{Binding IntelligenceObject.Value}" />
                     <DataGridTextColumn Header="Age"
                                         Binding="{Binding Age}" />
                     <DataGridTextColumn Header="Life Expectancy"

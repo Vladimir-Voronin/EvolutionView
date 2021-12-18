@@ -3,6 +3,7 @@ using EvolutionView.Models.BaseModels;
 using EvolutionView.Models.Characteristics;
 using EvolutionView.Models.Organisms;
 using System;
+using System.Collections.Generic;
 
 namespace EvolutionView.Models.Worlds
 {
@@ -17,6 +18,7 @@ namespace EvolutionView.Models.Worlds
             points += EvaluateHeight(human.HeightObject);
             points += EvaluateBodyPhysics(human.BodyPhysicsObject);
             points += EvaluateBeauty(human.BeautyObject);
+            points += EvaluateIntelligence(human.IntelligenceObject);
 
             return points;
         }
@@ -46,6 +48,21 @@ namespace EvolutionView.Models.Worlds
             if (body_physics != null && body_physics.Value.HasValue)
             {
                 return EvaluatePro.LinearFunctionFloatWithFlatMax(BodyPhisicsParametrsDefault.min_value, BodyPhisicsParametrsDefault.max_value, 50, body_physics.Value.Value, Convert.ToInt32(BeautyParametrsDefault.max_value * 0.3));
+            }
+            return 0;
+        }
+        
+        private float EvaluateIntelligence(Intelligence intelligence)
+        {
+            if (intelligence != null && intelligence.Value.HasValue)
+            {
+                List<(int, int)> coeficients = new List<(int, int)>() { (IntelligenceParametrsDefault.min_value, Convert.ToInt32(IntelligenceParametrsDefault.max_value * 0.4)),
+                                                                            (Convert.ToInt32(IntelligenceParametrsDefault.max_value * 0.4), Convert.ToInt32(IntelligenceParametrsDefault.max_value * 0.9)),
+                                                                            (Convert.ToInt32(IntelligenceParametrsDefault.max_value * 0.9), IntelligenceParametrsDefault.max_value) };
+
+                List<(int, int)> values = new List<(int, int)>() { (0, 100), (100, 100), (100, 70)};
+
+                return EvaluatePro.LinearFunctionFloatByLists(coeficients, values, intelligence.Value.Value);
             }
             return 0;
         }

@@ -80,6 +80,14 @@ namespace EvolutionView.ViewModels
             get { return is_active_body_physics_characteristic = BeautyParametrsDefault.IsActive; }
             set { is_active_body_physics_characteristic = BeautyParametrsDefault.IsActive = value; }
         }
+        
+        private bool is_active_intelligence_characteristic = IntelligenceParametrsDefault.IsActive;
+
+        public bool IsActiveIntelligenceCharacteristic
+        {
+            get { return is_active_intelligence_characteristic = IntelligenceParametrsDefault.IsActive; }
+            set { is_active_intelligence_characteristic = IntelligenceParametrsDefault.IsActive = value; }
+        }
 
         #endregion
 
@@ -202,6 +210,28 @@ namespace EvolutionView.ViewModels
             get { return genes_value_beauty; }
             set { genes_value_beauty = value; }
         }
+        
+        private int min_genes_intellegence = IntelligenceParametrsDefault.min_genes;
+
+        public int MinGenesIntellegenceSlidery
+        {
+            get { return min_genes_intellegence = IntelligenceParametrsDefault.min_genes; }
+        }
+
+        private int max_genes_intellegence = IntelligenceParametrsDefault.max_genes;
+
+        public int MaxGenesIntellegence
+        {
+            get { return max_genes_intellegence = IntelligenceParametrsDefault.max_genes; }
+        }
+
+        private int genes_value_intellegence;
+
+        public int GenesValueIntellegence
+        {
+            get { return genes_value_intellegence; }
+            set { genes_value_intellegence = value; }
+        }
 
         #endregion
 
@@ -234,6 +264,7 @@ namespace EvolutionView.ViewModels
             HeightParametrsDefault.CurrentGenes = GenesValueHeight;
             BodyPhisicsParametrsDefault.CurrentGenes = GenesValueBodyPhysics;
             BeautyParametrsDefault.CurrentGenes = GenesValueBeauty;
+            IntelligenceParametrsDefault.CurrentGenes = GenesValueIntellegence;
 
             EvolutionObject = new Evolution(new BasketballPlayersWorld(), NumberOfPeople);
         }

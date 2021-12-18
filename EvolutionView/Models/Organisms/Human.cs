@@ -48,6 +48,8 @@ namespace EvolutionView.Models.Organisms
 
         public Beauty BeautyObject { get; set; }
 
+        public Intelligence IntelligenceObject { get; set; }
+
         public float Points { get; set; }
 
         public List<Gene> GenesList { get; set; }
@@ -93,7 +95,7 @@ namespace EvolutionView.Models.Organisms
 
         public void GetLifeExpectancy()
         {
-            LifeExpectancy = EvaluatePro.LinearFunctionInt(HumanParametrsDefault.LifeCoeficients, HumanParametrsDefault.LifeValues);
+            LifeExpectancy = EvaluatePro.LinearFunctionIntRandomByLists(HumanParametrsDefault.LifeCoeficients, HumanParametrsDefault.LifeValues);
         }
 
         public void SetRandomlyGensList()
@@ -132,6 +134,7 @@ namespace EvolutionView.Models.Organisms
             SetAndCalculateHeight();
             SetAndCalculateBodyPhysics();
             SetAndCalculateBeauty();
+            SetAndCalculateIntelligence();
         }
 
         public void SetAndCalculateHeight()
@@ -193,6 +196,27 @@ namespace EvolutionView.Models.Organisms
 
                 int step = Convert.ToInt32((BeautyParametrsDefault.max_value - BeautyParametrsDefault.min_value) * percent_equals_to_1);
                 BeautyObject.Value = Convert.ToInt32(BeautyParametrsDefault.min_value + step) + StaticVariables.Rand.Next(-shift, shift + 1);
+            }
+        }
+        
+        public void SetAndCalculateIntelligence()
+        {
+            if (IntelligenceParametrsDefault.IsActive)
+            {
+                int shift = (IntelligenceParametrsDefault.max_value - IntelligenceParametrsDefault.min_value) / IntelligenceParametrsDefault.CurrentGenes / 2;
+                // Create new object
+                IntelligenceObject = IntelligenceParametrsDefault.ReturnNewCharacteristic();
+                // From GenesList set Serie to object
+                IntelligenceObject.GenesObject.Serie = GenesList.GetRange(IntelligenceParametrsDefault.StartIndex, IntelligenceParametrsDefault.EndIndex - IntelligenceParametrsDefault.StartIndex).ToArray();
+
+                // Calculate Height.Value
+                int amount_of_genes = IntelligenceParametrsDefault.EndIndex - IntelligenceParametrsDefault.StartIndex;
+
+                float percent_equals_to_1 = GenesList.GetRange(IntelligenceParametrsDefault.StartIndex, IntelligenceParametrsDefault.EndIndex - IntelligenceParametrsDefault.StartIndex).Count((x) => x.Value == 1) /
+                    (float)GenesList.GetRange(IntelligenceParametrsDefault.StartIndex, IntelligenceParametrsDefault.EndIndex - IntelligenceParametrsDefault.StartIndex).Count;
+
+                int step = Convert.ToInt32((IntelligenceParametrsDefault.max_value - IntelligenceParametrsDefault.min_value) * percent_equals_to_1);
+                IntelligenceObject.Value = Convert.ToInt32(IntelligenceParametrsDefault.min_value + step) + StaticVariables.Rand.Next(-shift, shift + 1);
             }
         }
 
