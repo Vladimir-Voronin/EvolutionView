@@ -1,12 +1,12 @@
-﻿using EvolutionView.Models.BaseModels;
-using System.Collections.Generic;
-using EvolutionView.Models.Characteristics;
+﻿using System;
 using System.Linq;
-using System;
-using EvolutionView.Infrastructure.Interfaces;
-using EvolutionView.Infrastructure;
 using System.ComponentModel;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using EvolutionView.Models.BaseModels;
+using EvolutionView.Models.Characteristics;
+using EvolutionView.Infrastructure;
+using EvolutionView.Infrastructure.Interfaces;
 using EvolutionView.Infrastructure.HelpClasses;
 
 namespace EvolutionView.Models.Organisms

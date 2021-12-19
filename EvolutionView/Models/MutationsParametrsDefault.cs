@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EvolutionView.Models
+﻿namespace EvolutionView.Models
 {
     class MutationsParametrsDefault
     {

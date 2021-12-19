@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using EvolutionView.Models.BaseModels;
+﻿using EvolutionView.Models.BaseModels;
 using EvolutionView.Models.Characteristics;
-using EvolutionView.Models.Organisms;
-using EvolutionView.Infrastructure.Interfaces;
 
 namespace EvolutionView.Models.Organisms
 {

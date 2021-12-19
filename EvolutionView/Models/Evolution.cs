@@ -38,6 +38,8 @@ namespace EvolutionView.Models
 
         private int current_year;
 
+        private HumanStatistic Statistic { get; set; }
+
         public int CurrentYear {
             get { return current_year; }
             set
@@ -57,6 +59,7 @@ namespace EvolutionView.Models
         {
             StopWork();
             WorldType = world_type;
+            Statistic = new HumanStatistic();
 
             HumanList.Clear();
             Factory = new HumanFactory();
@@ -181,6 +184,8 @@ namespace EvolutionView.Models
                     }
                 }
             }
+
+            Statistic.UpdateStatistic(AliveHumansInThisYear);
         }
 
         private void AdjustDeathCoefficient(int number_of_alive_humans)

@@ -1,22 +1,14 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using EvolutionView.Models.BaseModels;
-using EvolutionView.Models.Characteristics;
-using EvolutionView.Models.Organisms;
-using EvolutionView.Infrastructure.Commands;
-using EvolutionView.Models.Worlds;
-using EvolutionView.Models;
-using System.Windows.Threading;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
-using EvolutionView.ViewModels.Base;
+using EvolutionView.Models;
+using EvolutionView.Models.Worlds;
+using EvolutionView.Models.Organisms;
+using EvolutionView.Models.Characteristics;
+using EvolutionView.Infrastructure.Commands;
 
 namespace EvolutionView.ViewModels
 {
