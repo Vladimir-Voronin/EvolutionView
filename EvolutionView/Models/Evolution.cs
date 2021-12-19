@@ -167,7 +167,7 @@ namespace EvolutionView.Models
                 float coef = MaxPointsInThisYear / 100;
                 for (int i = 0; i < AliveHumansInThisYear.Count(); i++)
                 {
-                    chance = (AliveHumansInThisYear[i].Points + 50 - MinPointsInThisYear) / MaxPointsInThisYear / Deathcoefficient / coef;
+                    chance = (AliveHumansInThisYear[i].Points + 100 - MinPointsInThisYear) / MaxPointsInThisYear / Deathcoefficient / coef;
                     randomFloat = (float)StaticVariables.Rand.NextDouble();
                     if (randomFloat < chance)
                     {

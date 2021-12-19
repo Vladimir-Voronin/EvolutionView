@@ -81,6 +81,18 @@ namespace EvolutionView.Models.Organisms
             {
                 if(alive_humans[0].HeightObject != null)
                     HeightPointsAverageNow.Value = alive_humans.Select(h => h.HeightObject.CurrentPoints).Average();
+                if(alive_humans[0].BodyPhysicsObject != null)
+                    BodyPhysicsAverageNow.Value = alive_humans.Select(h => h.BodyPhysicsObject.CurrentPoints).Average();
+                if(alive_humans[0].BeautyObject != null)
+                    BeautyPointsAverageNow.Value = alive_humans.Select(h => h.BeautyObject.CurrentPoints).Average();
+                if(alive_humans[0].IntelligenceObject != null)
+                    IntelligencePointsAverageNow.Value = alive_humans.Select(h => h.IntelligenceObject.CurrentPoints).Average();
+                if(alive_humans[0].EmotionalityObject != null)
+                    EmotionalityPointsAverageNow.Value = alive_humans.Select(h => h.EmotionalityObject.CurrentPoints).Average();
+                if(alive_humans[0].ExtroversionObject != null)
+                    ExtroversionPointsAverageNow.Value = alive_humans.Select(h => h.ExtroversionObject.CurrentPoints).Average();
+                if(alive_humans[0].CreativityObject != null)
+                    CreativityPointsAverageNow.Value = alive_humans.Select(h => h.CreativityObject.CurrentPoints).Average();
             }
         }
     }

@@ -19,7 +19,13 @@ namespace EvolutionView.ViewModels
         {
             HumanStatistic statistic = new HumanStatistic();
             Values1 = new ChartValues<ObservableValue> { HumanStatistic._HeightPointsAverageNow,
-                                                        new ObservableValue(0)};
+                                                         HumanStatistic._BodyPhysicsAverageNow,
+                                                         HumanStatistic._BeautyPointsAverageNow,
+                                                         HumanStatistic._IntelligencePointsAverageNow,
+                                                         HumanStatistic._EmotionalityPointsAverageNow,
+                                                         HumanStatistic._ExtroversionPointsAverageNow,
+                                                         HumanStatistic._CreativityPointsAverageNow,
+                                                         };
 
             Values2 = new ChartValues<double> { BasketballPlayersWorld.HeightMaxPoints,
                                                 BasketballPlayersWorld.BodyPhysicsMaxPoints,

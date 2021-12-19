@@ -130,10 +130,11 @@ namespace EvolutionView.Models.Worlds
         {
             if (creativity != null && creativity.Value.HasValue)
             {
-                List<(int, int)> coeficients = new List<(int, int)>() { (EmotionalityParametrsDefault.min_value, Convert.ToInt32(EmotionalityParametrsDefault.max_value * 0.7)),
+                List<(int, int)> coeficients = new List<(int, int)>() { (EmotionalityParametrsDefault.min_value, Convert.ToInt32(EmotionalityParametrsDefault.max_value * 0.3)),
+                                                                            (Convert.ToInt32(EmotionalityParametrsDefault.max_value * 0.3), Convert.ToInt32(EmotionalityParametrsDefault.max_value* 0.7)),
                                                                             (Convert.ToInt32(EmotionalityParametrsDefault.max_value * 0.7), EmotionalityParametrsDefault.max_value) };
 
-                List<(int, int)> values = new List<(int, int)>() { (0, 0), (0, CreativityMaxPoints) };
+                List<(int, int)> values = new List<(int, int)>() { (0, 0), (0, Convert.ToInt32(CreativityMaxPoints *0.2)), (Convert.ToInt32(CreativityMaxPoints*0.2), CreativityMaxPoints) };
 
                 creativity.CurrentPoints = EvaluatePro.LinearFunctionFloatByLists(coeficients, values, creativity.Value.Value);
 
