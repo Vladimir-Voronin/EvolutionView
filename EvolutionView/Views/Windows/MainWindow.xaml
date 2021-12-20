@@ -160,7 +160,7 @@
 
             <TextBlock HorizontalAlignment="Left"
                        VerticalAlignment="Top"
-                       Margin="20,36,0,0"
+                       Margin="20,30,0,0"
                        Text="Choose the world"
                        FontSize="16" />
 
@@ -169,11 +169,15 @@
                       Margin="30,80,0,0"
                       IsChecked="{Binding DeleteDeadHumans}" />
 
-            <ComboBox Height="18"
-                      Width="102"
+            <ComboBox Height="31"
+                      Width="200"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Top"
-                      Margin="162,39,0,0"></ComboBox>
+                      Margin="162,29,0,0"
+                      ItemsSource="{Binding WorldsList}"
+                      SelectedItem="{Binding WorldKey}">
+
+            </ComboBox>
 
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>

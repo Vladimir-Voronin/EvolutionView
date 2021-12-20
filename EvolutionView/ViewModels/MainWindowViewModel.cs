@@ -9,10 +9,13 @@ using EvolutionView.Models.Worlds;
 using EvolutionView.Models.Organisms;
 using EvolutionView.Models.Characteristics;
 using EvolutionView.Infrastructure.Commands;
+using EvolutionView.Models.BaseModels;
+using System.Collections.Generic;
+using EvolutionView.ViewModels.Base;
 
 namespace EvolutionView.ViewModels
 {
-    class MainWindowViewModel : IDisposable, INotifyPropertyChanged
+    class MainWindowViewModel : ViewModel, IDisposable
     {
         #region Properties
 
@@ -34,7 +37,6 @@ namespace EvolutionView.ViewModels
                 OnPropertyChanged();
             }
         }
-
         private bool delete_dead_humans = Evolution.DeleteDeadHumans;
 
         public bool DeleteDeadHumans 
@@ -54,7 +56,27 @@ namespace EvolutionView.ViewModels
             set { _should_show_statistic = value;
                 OnPropertyChanged();
             }
-        } 
+        }
+
+        #region Comboboxes
+
+
+        private readonly List<HumanWorld> _worlds_list = new List<HumanWorld>() { new BasketballPlayersWorld(), new LawyersWorld() };
+
+        public List<HumanWorld> WorldsList
+        {
+            get { return _worlds_list; }
+        }
+
+        private HumanWorld _world_key;
+
+        public HumanWorld WorldKey
+        {
+            get => _world_key;
+            set => Set(ref _world_key, value);
+        }
+
+        #endregion
 
         #region GenesSettings
 
@@ -391,7 +413,8 @@ namespace EvolutionView.ViewModels
             ExtroversionParametrsDefault.CurrentGenes = GenesValueExtroversion;
             CreativityParametrsDefault.CurrentGenes = GenesValueCreativity;
 
-            EvolutionObject = new Evolution(new BasketballPlayersWorld(), NumberOfPeople);
+            EvolutionObject = new Evolution(WorldKey, NumberOfPeople);
+            StatisticVM.UpdateStatisticMaxValues();
         }
 
         public ICommand StartEvolutionCommand { get; }
@@ -506,18 +529,6 @@ namespace EvolutionView.ViewModels
             // TODO: uncomment the following line if the finalizer is overridden above.
             // GC.SuppressFinalize(this);
         }
-        #endregion
-
-        #region Property changed logic
-
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string PropertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
-        }
-
         #endregion
     }
 }

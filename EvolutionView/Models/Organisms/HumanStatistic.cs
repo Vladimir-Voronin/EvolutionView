@@ -95,5 +95,7 @@ namespace EvolutionView.Models.Organisms
                     CreativityPointsAverageNow.Value = alive_humans.Select(h => h.CreativityObject.CurrentPoints).Average();
             }
         }
+
+       
     }
 }

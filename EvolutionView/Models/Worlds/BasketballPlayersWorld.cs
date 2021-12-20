@@ -9,15 +9,15 @@ namespace EvolutionView.Models.Worlds
 {
     class BasketballPlayersWorld : HumanWorld
     {
-        public static string Name { get; set; } = "Basketball Players";
+        public new static string Name { get; set; } = "Basketball Players";
 
-        public static int HeightMaxPoints { get; set; } = 200;
-        public static int BodyPhysicsMaxPoints { get; set; } = 150;
-        public static int BeautyMaxPoints { get; set; } = 50;
-        public static int IntelligenceMaxPoints { get; set; } = 100;
-        public static int EmotionalityMaxPoints { get; set; } = 100;
-        public static int ExtroversionMaxPoints { get; set; } = 60;
-        public static int CreativityMaxPoints { get; set; } = 80;
+        public new static int HeightMaxPoints { get; set; } = 200;
+        public new static int BodyPhysicsMaxPoints { get; set; } = 150;
+        public new static int BeautyMaxPoints { get; set; } = 50;
+        public new static int IntelligenceMaxPoints { get; set; } = 100;
+        public new static int EmotionalityMaxPoints { get; set; } = 100;
+        public new static int ExtroversionMaxPoints { get; set; } = 60;
+        public new static int CreativityMaxPoints { get; set; } = 80;
 
         public override float CalculatePointsForHumanInThisWorld(Human human)
         {
@@ -33,6 +33,51 @@ namespace EvolutionView.Models.Worlds
 
             return points;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        #region GetMethods
+
+        public override int getHeightMaxPoints()
+        {
+            return HeightMaxPoints;
+        }
+
+        public override int getBodyPhysicsMaxPoints()
+        {
+            return BodyPhysicsMaxPoints;
+        }
+
+        public override int getBeautyMaxPoints()
+        {
+            return BeautyMaxPoints;
+        }
+
+        public override int getIntelligenceMaxPoints()
+        {
+            return IntelligenceMaxPoints;
+        }
+
+        public override int getEmotionalityMaxPoints()
+        {
+            return EmotionalityMaxPoints;
+        }
+
+        public override int getExtroversionMaxPoints()
+        {
+            return ExtroversionMaxPoints;
+        }
+
+        public override int getCreativityMaxPoints()
+        {
+            return CreativityMaxPoints;
+        }
+
+        #endregion
+
 
         #region Evaluation Methods
 

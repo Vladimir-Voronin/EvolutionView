@@ -1,4 +1,5 @@
-﻿using EvolutionView.Models.Organisms;
+﻿using EvolutionView.Models;
+using EvolutionView.Models.Organisms;
 using EvolutionView.Models.Worlds;
 using LiveCharts;
 using LiveCharts.Defaults;
@@ -15,6 +16,29 @@ namespace EvolutionView.ViewModels
 
         public ChartValues<double> Values2 { get; set; }
 
+        public void UpdateStatisticMaxValues()
+        {
+            //Values2 = new ChartValues<double> { Evolution.WorldType.getHeightMaxPoints(),
+            //                                    Evolution.WorldType.getBodyPhysicsMaxPoints(),
+            //                                    Evolution.WorldType.getBeautyMaxPoints(),
+            //                                    Evolution.WorldType.getIntelligenceMaxPoints(),
+            //                                    Evolution.WorldType.getEmotionalityMaxPoints(),
+            //                                    Evolution.WorldType.getExtroversionMaxPoints(),
+            //                                    Evolution.WorldType.getCreativityMaxPoints(),
+            //};
+            Values2[0] = Evolution.WorldType.getHeightMaxPoints();
+            Values2[1] = Evolution.WorldType.getBodyPhysicsMaxPoints();
+            Values2[2] = Evolution.WorldType.getBeautyMaxPoints();
+            Values2[3] = Evolution.WorldType.getIntelligenceMaxPoints();
+            Values2[4] = Evolution.WorldType.getEmotionalityMaxPoints();
+            Values2[5] = Evolution.WorldType.getExtroversionMaxPoints();
+            Values2[6] = Evolution.WorldType.getCreativityMaxPoints();
+
+            //Values2.Add(0);
+            //Values2.RemoveAt(7);
+        }
+
+
         public StatisticViewModel()
         {
             HumanStatistic statistic = new HumanStatistic();
@@ -26,16 +50,14 @@ namespace EvolutionView.ViewModels
                                                          HumanStatistic._ExtroversionPointsAverageNow,
                                                          HumanStatistic._CreativityPointsAverageNow,
                                                          };
-
-            Values2 = new ChartValues<double> { BasketballPlayersWorld.HeightMaxPoints,
-                                                BasketballPlayersWorld.BodyPhysicsMaxPoints,
-                                                BasketballPlayersWorld.BeautyMaxPoints,
-                                                BasketballPlayersWorld.IntelligenceMaxPoints,
-                                                BasketballPlayersWorld.EmotionalityMaxPoints,
-                                                BasketballPlayersWorld.ExtroversionMaxPoints,
-                                                BasketballPlayersWorld.CreativityMaxPoints,
+            Values2 = new ChartValues<double> { 0,
+                                                0,
+                                                0,
+                                                0,
+                                                0,
+                                                0,
+                                                0,
             };
-            //Values1 = new ChartValues<ObservableValue> { new ObservableValue(0), new ObservableValue(0),  };
         }
 
         #region PropertyChanged logic

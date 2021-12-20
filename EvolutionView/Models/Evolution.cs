@@ -24,7 +24,7 @@ namespace EvolutionView.Models
 
         private float Deathcoefficient { get; set; }
 
-        private HumanWorld WorldType { get; set; }
+        public static HumanWorld WorldType { get; set; }
 
         private List<Human> AliveHumansInThisYear { get; set; }
 
@@ -69,6 +69,8 @@ namespace EvolutionView.Models
             {
                 HumanList.Add(Factory.ReturnNewHuman());
             }
+            
+            Statistic.UpdateStatistic(HumanList.ToList<Human>());
 
             Deathcoefficient = DefaultDeathCoefficientPart;
             CurrentYear = 0;
