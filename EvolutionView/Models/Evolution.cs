@@ -71,6 +71,8 @@ namespace EvolutionView.Models
             }
             
             Statistic.UpdateStatistic(HumanList.ToList<Human>());
+            Statistic.ClearGeared();
+            Statistic.UpdateGeared();
 
             Deathcoefficient = DefaultDeathCoefficientPart;
             CurrentYear = 0;
@@ -188,6 +190,8 @@ namespace EvolutionView.Models
             }
 
             Statistic.UpdateStatistic(AliveHumansInThisYear);
+            if (CurrentYear % 30 == 0)
+                Statistic.UpdateGeared();
         }
 
         private void AdjustDeathCoefficient(int number_of_alive_humans)
