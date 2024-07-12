@@ -1,0 +1,544 @@
+﻿<Window x:Class="EvolutionView.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EvolutionView"
+        xmlns:vm="clr-namespace:EvolutionView.ViewModels"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="1080"
+        Width="1920"
+        WindowState="Maximized">
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Menu Height="25">
+            <MenuItem Header="File"
+                      Height="25"></MenuItem>
+            <MenuItem Header="About"
+                      Height="25"></MenuItem>
+        </Menu>
+
+        <Grid Grid.Column="0"
+              Grid.Row="1"
+              Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Top"
+                       Width="200"
+                       Height="40"
+                       Margin="140,10,10,10"
+                       TextAlignment="Center"
+                       FontSize="20"
+                       Text="{Binding ListOfHumans.Count}" />
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="70" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Width="700"
+                           Height="25"
+                           Margin="60,0,0,0"
+                           Text="Number of organisms"
+                           FontSize="16" />
+
+                <Slider Grid.Row="0"
+                        Name="AmountOfHumanSlider"
+                        HorizontalAlignment="Left"
+                        Width="700"
+                        Height="25"
+                        Margin="60,30,0,0"
+                        VerticalAlignment="Top"
+                        Minimum="{Binding MinHumans}"
+                        Maximum="{Binding MaxHumans}"
+                        Value="{Binding NumberOfPeople}"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1">
+                </Slider>
+
+                <TextBlock Grid.Row="0"
+                           Margin="0,10,10,10"
+                           Text="{Binding ElementName=AmountOfHumanSlider, Path=Value}"
+                           Width="140"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Left"
+                           FontSize="20"></TextBlock>
+
+                <TextBlock Grid.Row="1"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Width="700"
+                           Height="25"
+                           Margin="60,0,0,0"
+                           Text="Population growth threshold"
+                           FontSize="16" />
+
+                <Slider Grid.Row="1"
+                        Name="PopulationThreshold"
+                        HorizontalAlignment="Left"
+                        Width="700"
+                        Height="25"
+                        Margin="60,30,0,0"
+                        VerticalAlignment="Top"
+                        Minimum="{Binding MinimumPopulationthreshold}"
+                        Maximum="{Binding MaximumPopulationthreshold}"
+                        Value="{Binding PopulationThresholdValue}"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1">
+                </Slider>
+
+                <TextBlock Grid.Row="1"
+                           Margin="0,10,10,10"
+                           Text="{Binding ElementName=PopulationThreshold, Path=Value}"
+                           Width="140"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Left"
+                           FontSize="20"></TextBlock>
+
+
+
+                <TextBlock Grid.Row="2"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           Width="700"
+                           Height="25"
+                           Margin="60,0,0,0"
+                           Text="Number of mutation genes"
+                           FontSize="16" />
+
+                <Slider Grid.Row="2"
+                        Name="Mutations"
+                        HorizontalAlignment="Left"
+                        Width="700"
+                        Height="25"
+                        Margin="60,30,0,0"
+                        VerticalAlignment="Top"
+                        Minimum="{Binding MinimumMutations}"
+                        Maximum="{Binding MaximumMutations}"
+                        Value="{Binding MutationsValue}"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1">
+                </Slider>
+
+                <TextBlock Grid.Row="2"
+                           Margin="0,10,10,10"
+                           Text="{Binding ElementName=Mutations, Path=Value}"
+                           Width="140"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Left"
+                           FontSize="20"></TextBlock>
+
+            </Grid>
+
+            <TextBlock HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Margin="20,30,0,0"
+                       Text="Choose the world"
+                       FontSize="16" />
+
+            <CheckBox Content="delete dead humans"
+                      VerticalAlignment="Top"
+                      Margin="30,80,0,0"
+                      IsChecked="{Binding DeleteDeadHumans}" />
+
+            <ComboBox Height="31"
+                      Width="200"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Margin="162,29,0,0"
+                      ItemsSource="{Binding WorldsList}"
+                      SelectedItem="{Binding WorldKey}"
+                      SelectedIndex="0">
+
+            </ComboBox>
+
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="8*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock  Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="3"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            FontSize="28"
+                            Text="Characteristics Settings" />
+
+                <CheckBox Grid.Row="1"
+                          Grid.Column="0"
+                          Content="Height"
+                          IsChecked="{Binding IsActiveHeightCharacteristic}">
+                </CheckBox>
+
+                <Slider Grid.Row="1"
+                        Grid.Column="1"
+                        Name="HeightSlider"
+                        Width="650"
+                        Height="25"
+                        HorizontalAlignment="Left"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1"
+                        Minimum="{Binding MinGenesHeight}"
+                        Maximum="{Binding MaxGenesHeight}"
+                        Value="{Binding GenesValueHeight}">
+                </Slider>
+
+                <TextBlock Grid.Row="1"
+                           Grid.Column="2"
+                           Margin="0,0,50,0"
+                           Text="{Binding ElementName=HeightSlider, Path=Value}"
+                           Width="30"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Center"
+                           FontSize="20"></TextBlock>
+
+
+                <CheckBox Grid.Row="2"
+                          Grid.Column="0"
+                          Content="Body Physics"
+                          IsChecked="{Binding IsActiveBodyPhysicsCharacteristic}">
+
+                </CheckBox>
+
+                <Slider Grid.Row="2"
+                        Grid.Column="1"
+                        Name="BodyPhysicsSlider"
+                        Width="650"
+                        Height="25"
+                        HorizontalAlignment="Left"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1"
+                        Minimum="{Binding MinGenesBodyPhysics}"
+                        Maximum="{Binding MaxGenesBodyPhysics}"
+                        Value="{Binding GenesValueBodyPhysics}">
+                </Slider>
+
+                <TextBlock Grid.Row="2"
+                           Grid.Column="2"
+                           Margin="0,0,50,0"
+                           Text="{Binding ElementName=BodyPhysicsSlider, Path=Value}"
+                           Width="30"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Center"
+                           FontSize="20"></TextBlock>
+
+                <CheckBox Grid.Row="3"
+                          Grid.Column="0"
+                          Content="Beauty"
+                          IsChecked="{Binding IsActiveBeautyCharacteristic}">
+                </CheckBox>
+
+                <Slider Grid.Row="3"
+                        Grid.Column="1"
+                        Name="BeautySlider"
+                        Width="650"
+                        Height="25"
+                        HorizontalAlignment="Left"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1"
+                        Minimum="{Binding MinGenesBeauty}"
+                        Maximum="{Binding MaxGenesBeauty}"
+                        Value="{Binding GenesValueBeauty}">
+                </Slider>
+
+                <TextBlock Grid.Row="3"
+                           Grid.Column="2"
+                           Margin="0,0,50,0"
+                           Text="{Binding ElementName=BeautySlider, Path=Value}"
+                           Width="30"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Center"
+                           FontSize="20"></TextBlock>
+
+
+                <CheckBox Grid.Row="4"
+                          Grid.Column="0"
+                          Content="Intellegence"
+                          IsChecked="{Binding IsActiveIntelligenceCharacteristic}">
+                </CheckBox>
+
+                <Slider Grid.Row="4"
+                        Grid.Column="1"
+                        Name="IntellegenceSlider"
+                        Width="650"
+                        Height="25"
+                        HorizontalAlignment="Left"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1"
+                        Minimum="{Binding MinGenesIntellegence}"
+                        Maximum="{Binding MaxGenesIntellegence}"
+                        Value="{Binding GenesValueIntellegence}">
+                </Slider>
+
+                <TextBlock Grid.Row="4"
+                           Grid.Column="2"
+                           Margin="0,0,50,0"
+                           Text="{Binding ElementName=IntellegenceSlider, Path=Value}"
+                           Width="30"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Center"
+                           FontSize="20"></TextBlock>
+
+                <CheckBox Grid.Row="5"
+                          Grid.Column="0"
+                          Content="Emotionality"
+                          IsChecked="{Binding IsActiveEmotionalityCharacteristic}">
+                </CheckBox>
+
+                <Slider Grid.Row="5"
+                        Grid.Column="1"
+                        Name="EmotionalitySlider"
+                        Width="650"
+                        Height="25"
+                        HorizontalAlignment="Left"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1"
+                        Minimum="{Binding MinGenesEmotionality}"
+                        Maximum="{Binding MaxGenesEmotionality}"
+                        Value="{Binding GenesValueEmotionality}">
+                </Slider>
+
+                <TextBlock Grid.Row="5"
+                           Grid.Column="2"
+                           Margin="0,0,50,0"
+                           Text="{Binding ElementName=EmotionalitySlider, Path=Value}"
+                           Width="30"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Center"
+                           FontSize="20"></TextBlock>
+
+                <CheckBox Grid.Row="6"
+                          Grid.Column="0"
+                          Content="Extoversion"
+                          IsChecked="{Binding IsActiveExtroversionCharacteristic}">
+                </CheckBox>
+
+                <Slider Grid.Row="6"
+                        Grid.Column="1"
+                        Name="Extroversion"
+                        Width="650"
+                        Height="25"
+                        HorizontalAlignment="Left"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1"
+                        Minimum="{Binding MinGenesExtroversion}"
+                        Maximum="{Binding MaxGenesExtroversion}"
+                        Value="{Binding GenesValueExtroversion}">
+                </Slider>
+
+                <TextBlock Grid.Row="6"
+                           Grid.Column="2"
+                           Margin="0,0,50,0"
+                           Text="{Binding ElementName=Extroversion, Path=Value}"
+                           Width="30"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Center"
+                           FontSize="20"></TextBlock>
+
+                <CheckBox Grid.Row="7"
+                          Grid.Column="0"
+                          Content="Creativity"
+                          IsChecked="{Binding IsActiveCreativityCharacteristic}">
+                </CheckBox>
+
+                <Slider Grid.Row="7"
+                        Grid.Column="1"
+                        Name="Creativity"
+                        Width="650"
+                        Height="25"
+                        HorizontalAlignment="Left"
+                        IsSnapToTickEnabled="True"
+                        TickFrequency="1"
+                        Minimum="{Binding MinGenesCreativity}"
+                        Maximum="{Binding MaxGenesCreativity}"
+                        Value="{Binding GenesValueCreativity}">
+                </Slider>
+
+                <TextBlock Grid.Row="7"
+                           Grid.Column="2"
+                           Margin="0,0,50,0"
+                           Text="{Binding ElementName=Creativity, Path=Value}"
+                           Width="30"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"
+                           TextAlignment="Center"
+                           FontSize="20"></TextBlock>
+
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Column="1"
+              Grid.Row="1"
+              Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="200" />
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+
+                <Button Grid.Column="0"
+                        Height="Auto"
+                        HorizontalAlignment="Left"
+                        Width="15"
+                        Command="{Binding ChangeStatisticViewCommand}">
+                </Button>
+
+                <DataGrid Grid.Row="0"
+                          Grid.Column="1"
+                          ItemsSource="{Binding ListOfHumans}"
+                          AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Height"
+                                            Binding="{Binding HeightObject.Value}" />
+                        <DataGridTextColumn Header="Body Physics"
+                                            Binding="{Binding BodyPhysicsObject.Value}" />
+                        <DataGridTextColumn Header="Beauty"
+                                            Binding="{Binding BeautyObject.Value}" />
+                        <DataGridTextColumn Header="Intelligence"
+                                            Binding="{Binding IntelligenceObject.Value}" />
+                        <DataGridTextColumn Header="Emotionality"
+                                            Binding="{Binding EmotionalityObject.Value}" />
+                        <DataGridTextColumn Header="Extroversion"
+                                            Binding="{Binding ExtroversionObject.Value}" />
+                        <DataGridTextColumn Header="Creativity"
+                                            Binding="{Binding CreativityObject.Value}" />
+                        <DataGridTextColumn Header="Age"
+                                            Binding="{Binding Age}" />
+                        <DataGridTextColumn Header="Children"
+                                            Binding="{Binding NumbersOfChildren}" />
+                        <DataGridTextColumn Header="Points"
+                                            Binding="{Binding Points, StringFormat={}{0:F2}}" />
+                    </DataGrid.Columns>
+
+                </DataGrid>
+            </Grid>
+
+
+
+            <Button Grid.Row="1"
+                    Width="100"
+                    Height="60"
+                    Command="{Binding ContinueEvolutionCommand}"
+                    Margin="682,70,158,70">
+                <fa:ImageAwesome Icon="Solid_Play"
+                                 Margin="10"
+                                 Foreground="Black" />
+            </Button>
+
+            <Button Grid.Row="1"
+                    Width="100"
+                    Height="60"
+                    Margin="568,70,272,70"
+                    Command="{Binding PauseEvolutionCommand}">
+                <fa:ImageAwesome Icon="Solid_Pause"
+                                 Margin="10"
+                                 Foreground="Black" />
+            </Button>
+            <Button Grid.Row="1"
+                    Width="100"
+                    Height="60"
+                    Margin="452,70,388,70"
+                    Content="Start"
+                    FontSize="24"
+                    Foreground="Black"
+                    Command="{Binding StartEvolutionCommand}">
+            </Button>
+
+            <TextBlock Grid.Row="1"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Width="120"
+                       Height="40"
+                       Margin="10"
+                       Text="Current year:"
+                       TextAlignment="Center"
+                       FontSize="20" />
+
+            <TextBlock Grid.Row="1"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Width="200"
+                       Height="40"
+                       Margin="140,10,10,10"
+                       TextAlignment="Center"
+                       FontSize="20"
+                       Text="{Binding EvolutionObject.CurrentYear}" />
+
+            <Button Grid.Row="1"
+                    Height="70"
+                    Margin="10,120,640,10"
+                    Content="Create New Evoluation"
+                    FontSize="24"
+                    Foreground="Black"
+                    Command="{Binding CreateEvolutionCommand}" />
+
+
+        </Grid>
+
+        <ContentControl Grid.Row="1"
+                        Grid.Column="0"
+                        Name="StatisticsPopup"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Width="900"
+                        Height="1000"
+                        Visibility="{Binding ShouldShowStatistic}"
+                        Background="#89BFEC"
+                        Content="{Binding StatisticVM}">
+        </ContentControl>
+    </Grid>
+</Window>

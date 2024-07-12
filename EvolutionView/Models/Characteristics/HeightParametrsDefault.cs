@@ -1,0 +1,36 @@
+﻿using EvolutionView.Infrastructure.Interfaces;
+
+namespace EvolutionView.Models.Characteristics
+{
+    class HeightParametrsDefault : ICharacteristicParametrsDefault
+    {
+        public static bool IsActive = true;
+        public static string Name = "Height";
+        public static readonly int min_value = 156;
+        public static readonly int max_value = 210;
+        public static readonly int min_genes = 8;
+        public static readonly int max_genes = 24;
+
+        public static int StartIndex { get; set; }
+        public static int EndIndex { get; set; }
+
+        private static int current_genes;
+
+        public static int CurrentGenes
+        {
+            get { return current_genes; }
+            set
+            {
+                if (value < min_genes) current_genes = min_genes;
+                else if (value > max_genes) current_genes = max_genes;
+                else current_genes = value;
+            }
+        }
+
+        public static Height ReturnNewCharacteristic()
+        {
+            GeneSeries g = new GeneSeries(CurrentGenes);
+            return new Height(g);
+        }
+    }
+}

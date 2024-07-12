@@ -6,7 +6,11 @@ namespace EvolutionViewConsoleTest
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            int a = 210;
+            int b = 156;
+            int c = a - b;
+            int d = c / 8;
+            Console.WriteLine(d);
         }
     }
 }
